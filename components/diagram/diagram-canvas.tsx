@@ -184,11 +184,12 @@ export function DiagramCanvas({
             centerOnInit
             limitToBounds={false}
             wheel={{ step: 0.08 }}
-            doubleClick={{ disabled: true }}
+            doubleClick={{ disabled: false, mode: "zoomIn", step: 0.7 }}
             panning={{ velocityDisabled: false }}
             onTransformed={(_ref, state) => setScale(state.scale)}
           >
             <TransformComponent
+              wrapperClass="cursor-grab active:cursor-grabbing"
               wrapperStyle={{ width: "100%", height: "100%" }}
               contentStyle={{ width: "fit-content", height: "fit-content" }}
             >
