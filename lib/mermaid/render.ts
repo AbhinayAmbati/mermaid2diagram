@@ -11,9 +11,36 @@ type MermaidApi = typeof import("mermaid").default;
  */
 let mermaidPromise: Promise<MermaidApi> | null = null;
 
+/**
+ * Whether the optional ELK layout engine registered successfully. ELK routes
+ * edges around nodes and away from each other, which is what keeps dense
+ * diagrams legible; dagre, the renderer bundled with Mermaid, lets edges cross
+ * freely.
+ */
+let elkReady = false;
+
+export function isElkReady(): boolean {
+  return elkReady;
+}
+
 export function loadMermaid(): Promise<MermaidApi> {
   if (!mermaidPromise) {
-    mermaidPromise = import("mermaid").then((mod) => mod.default);
+    mermaidPromise = (async () => {
+      const mod = await import("mermaid");
+      const mermaid = mod.default;
+
+      // ELK ships as a separate optional layout loader. If it cannot be loaded
+      // we carry on with the bundled renderer rather than failing to draw.
+      try {
+        const elk = await import("@mermaid-js/layout-elk");
+        mermaid.registerLayoutLoaders(elk.default ?? elk);
+        elkReady = true;
+      } catch {
+        elkReady = false;
+      }
+
+      return mermaid;
+    })();
   }
   return mermaidPromise;
 }
@@ -94,7 +121,20 @@ export async function renderDiagram({
   const mermaid = await loadMermaid();
 
   // Re-initialise on every pass so theme/config changes always take effect.
-  mermaid.initialize({ ...config, startOnLoad: false });
+  mermaid.initialize({
+    ...config,
+    startOnLoad: false,
+    // If the ELK loader is unavailable, force the bundled renderer so the
+    // diagram still draws instead of failing on an unknown layout.
+    ...(elkReady
+      ? {}
+      : {
+          flowchart: {
+            ...config.flowchart,
+            defaultRenderer: "dagre-wrapper" as const,
+          },
+        }),
+  });
 
   let diagramType = "unknown";
   try {

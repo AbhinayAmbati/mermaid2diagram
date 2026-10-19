@@ -33,6 +33,16 @@ describe("buildMermaidConfig", () => {
     expect(config.flowchart?.curve).toBe("linear");
   });
 
+  it("uses the ELK layout engine by default so edges do not cross", () => {
+    expect(buildMermaidConfig(DEFAULT_SETTINGS).flowchart?.defaultRenderer).toBe(
+      "elk"
+    );
+    expect(
+      buildMermaidConfig({ ...DEFAULT_SETTINGS, layoutEngine: "dagre" }).flowchart
+        ?.defaultRenderer
+    ).toBe("dagre-wrapper");
+  });
+
   it("maps settings onto theme variables", () => {
     const config = buildMermaidConfig({
       ...DEFAULT_SETTINGS,

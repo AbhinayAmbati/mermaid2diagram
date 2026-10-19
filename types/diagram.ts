@@ -25,6 +25,9 @@ export interface AppearancePreset {
   themeVariables: ThemeVariables;
 }
 
+/** Layout engines Mermaid can drive a flowchart with. */
+export type FlowchartRenderer = "dagre-d3" | "dagre-wrapper" | "elk";
+
 /** Mermaid's supported flowchart edge curves. */
 export type FlowchartCurve =
   | "basis"
@@ -59,6 +62,7 @@ export interface MermaidConfig {
     rankSpacing?: number;
     diagramPadding?: number;
     curve?: FlowchartCurve;
+    defaultRenderer?: FlowchartRenderer;
   };
   sequence?: { useMaxWidth?: boolean; wrap?: boolean };
   gantt?: { useMaxWidth?: boolean };
@@ -100,6 +104,8 @@ export interface DiagramSettings {
   fontFamily: string;
   fontSize: number;
   padding: number;
+  /** Which layout engine drives flowcharts. */
+  layoutEngine: "elk" | "dagre";
   canvasBackground: CanvasBackground;
   showGrid: boolean;
   exportBackground: "white" | "transparent" | "dark";

@@ -102,6 +102,9 @@ export const DEFAULT_SETTINGS: DiagramSettings = {
   fontFamily: DIAGRAM_FONT_STACK,
   fontSize: 14,
   padding: 16,
+  // ELK routes edges around nodes instead of straight through them, which is
+  // what stops dense diagrams turning into a web of crossing lines.
+  layoutEngine: "elk",
   canvasBackground: "grid",
   showGrid: true,
   exportBackground: "white",
@@ -142,11 +145,13 @@ export function buildMermaidConfig(settings: DiagramSettings): MermaidConfig {
       useMaxWidth,
       htmlLabels: false,
       padding: settings.padding,
-      // Straight edges rather than Mermaid's default `basis` splines. The
-      // spline overshoots and bundles neighbouring edges into an unreadable
-      // mass on diagrams with several cross-cluster links, which is exactly
-      // the case straight segments fix.
+      // Straight edges rather than Mermaid's default `basis` splines, which
+      // overshoot and bundle neighbouring edges together.
       curve: "linear",
+      // ELK assigns edge routes that avoid nodes and each other. Dagre, the
+      // bundled renderer, crosses edges freely, which is unreadable once a
+      // diagram has several cross-cluster links.
+      defaultRenderer: settings.layoutEngine === "elk" ? "elk" : "dagre-wrapper",
       // More room between sibling nodes and between ranks, so edges have
       // space to separate instead of running on top of each other.
       nodeSpacing: 70,

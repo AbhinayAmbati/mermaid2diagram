@@ -226,6 +226,34 @@ export function DiagramSettingsPanel({
                 aria-label="Diagram padding"
               />
             </div>
+
+            <div className="space-y-2 pt-1">
+              <Label
+                htmlFor="layout-engine"
+                className="label-mono text-muted-foreground"
+              >
+                Layout engine
+              </Label>
+              <Select
+                value={settings.layoutEngine}
+                onValueChange={(value) =>
+                  updateSettings({ layoutEngine: value as "elk" | "dagre" })
+                }
+              >
+                <SelectTrigger id="layout-engine">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="elk">ELK, edges routed apart</SelectItem>
+                  <SelectItem value="dagre">Dagre, classic</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                ELK gives every edge its own route around the nodes, which keeps
+                busy diagrams readable. Dagre is Mermaid&apos;s classic layout and
+                lets edges cross.
+              </p>
+            </div>
           </Section>
 
           <Section title="Theme variables">
