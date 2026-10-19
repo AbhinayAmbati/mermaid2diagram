@@ -27,7 +27,7 @@ const SPEC_ROWS = [
  */
 export function Hero() {
   return (
-    <section className="flex min-h-[calc(100dvh-4.5rem)] items-center px-4 py-8 sm:min-h-[calc(100dvh-5rem)]">
+    <section className="flex min-h-[calc(100dvh-4.5rem)] items-center px-4 py-6 sm:min-h-[calc(100dvh-5rem)]">
       <div className="mx-auto grid w-full max-w-[1320px] items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-14">
         {/* Left: statement */}
         <div>
@@ -57,17 +57,17 @@ export function Hero() {
             {SPEC_ROWS.map((row) => (
               <div
                 key={row.label}
-                className="border-t border-border py-2.5 last:border-b"
+                className="border-t border-border py-4 last:border-b"
               >
                 <dt className="label-mono text-muted-foreground">{row.label}</dt>
-                <dd className="mt-1.5 text-sm leading-snug text-foreground">
+                <dd className="mt-2 text-sm leading-snug text-foreground">
                   {row.value}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             No account required · Runs in your browser
           </p>
         </div>
