@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Buttons are uppercase monospace with wide letter-spacing — the signature
+ * Buttons are uppercase monospace with wide letter-spacing - the signature
  * control style of the design system.
  */
 const buttonVariants = cva(
@@ -27,10 +27,10 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-9 px-4",
-        sm: "h-8 px-3 text-[10px]",
-        lg: "h-11 px-6 text-[12px]",
-        icon: "h-9 w-9",
-        "icon-sm": "h-8 w-8",
+        sm: "h-7 px-3 text-[10px]",
+        lg: "h-10 px-5 text-[12px]",
+        icon: "h-8 w-8",
+        "icon-sm": "h-7 w-7",
       },
     },
     defaultVariants: {
