@@ -11,7 +11,7 @@ const FEATURES = [
   {
     icon: Code2,
     title: "A real code editor",
-    body: "CodeMirror with Mermaid syntax highlighting, line numbers, undo/redo and keyboard shortcuts — not a styled textarea.",
+    body: "CodeMirror 6 with Mermaid syntax highlighting, line numbers, undo/redo and keyboard shortcuts — not a styled textarea.",
   },
   {
     icon: Gauge,
@@ -31,7 +31,7 @@ const FEATURES = [
   {
     icon: Palette,
     title: "Tasteful presets",
-    body: "Classic, Monochrome, Electric Blue and Soft Minimal, plus theme variables for fine control.",
+    body: "Classic, Monochrome, Terminal Lime and Soft Minimal, plus theme variables for fine control.",
   },
   {
     icon: ShieldCheck,
@@ -42,28 +42,36 @@ const FEATURES = [
 
 export function FeatureGrid() {
   return (
-    <section id="features" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <section id="features" className="px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1320px]">
         <div className="max-w-2xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="label-mono text-muted-foreground">03 / Features</span>
+          <h2 className="mt-4 text-[1.75rem] font-medium leading-tight tracking-[-0.02em] sm:text-[2.25rem]">
             Built like a tool, not a demo
           </h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Every control on the editor does something real, and the export
             pipeline produces files you can actually ship.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature) => {
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={feature.title} className="bg-card p-6">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-secondary text-primary">
-                  <Icon className="h-4 w-4" />
+              <div key={feature.title} className="group bg-card p-7">
+                <div className="flex items-start justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-secondary text-foreground transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/60">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <h3 className="mt-4 text-sm font-semibold">{feature.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-6 text-base font-semibold tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {feature.body}
                 </p>
               </div>

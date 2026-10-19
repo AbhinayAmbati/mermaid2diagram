@@ -5,26 +5,24 @@ import { Button } from "@/components/ui/button";
 
 export function FinalCta() {
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-foreground px-6 py-14 text-center sm:px-12">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.15] [background-image:radial-gradient(#ffffff_1px,transparent_1px)] [background-size:22px_22px]"
-          />
+    <section className="px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="chamfer-lg-tl-br relative overflow-hidden bg-panel px-6 py-16 text-center sm:px-16 sm:py-24">
+          <div className="blueprint-grid absolute inset-0" aria-hidden />
           <div className="relative">
-            <h2 className="text-balance text-2xl font-semibold tracking-tight text-background sm:text-3xl">
+            <span className="label-mono text-primary">Ready when you are</span>
+            <h2 className="mx-auto mt-5 max-w-3xl text-balance text-[2rem] font-medium leading-[1.1] tracking-[-0.03em] text-on-panel sm:text-[3rem]">
               Your next diagram is one paste away.
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-background/70 sm:text-base">
+            <p className="mx-auto mt-6 max-w-xl text-pretty text-[0.9375rem] leading-relaxed text-on-panel-muted">
               Open the editor, drop in your Mermaid code and export a crisp file
               in seconds — no sign-up, no server round-trips.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-9 flex justify-center">
               <Button size="lg" asChild className="gap-2">
                 <Link href="/editor">
                   Start Creating
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </Button>
             </div>

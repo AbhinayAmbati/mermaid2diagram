@@ -5,55 +5,77 @@ import { Button } from "@/components/ui/button";
 
 import { HeroPreview } from "./hero-preview";
 
+const SPEC_ROWS = [
+  {
+    label: "Engine",
+    value: "Mermaid v11 — flowcharts, sequence, class, ER, Gantt, mindmaps",
+  },
+  {
+    label: "Editor",
+    value: "CodeMirror 6 with Mermaid syntax highlighting",
+  },
+  {
+    label: "Exports",
+    value: "SVG · PNG · PDF · JPEG · .mmd",
+  },
+];
+
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 grid-bg-dots opacity-60 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
-      />
-      <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground shadow-subtle">
+    <section className="px-4 pb-16 pt-6 sm:pb-24 sm:pt-10">
+      <div className="mx-auto grid max-w-[1320px] items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
+        {/* Left: statement */}
+        <div className="pt-4 lg:pt-14">
+          <span className="label-mono inline-flex items-center gap-2 text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            In-browser Mermaid editor & exporter
+            Mermaid Studio
           </span>
 
-          <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="mt-5 text-balance text-[2.5rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
             From Mermaid Code to{" "}
-            <span className="text-primary">Beautiful Diagrams.</span>
+            <span className="text-muted-foreground/45">
+              Beautiful Diagrams.
+            </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-6 max-w-xl text-pretty text-[1.0625rem] leading-relaxed text-muted-foreground">
             Write or paste Mermaid syntax. Preview your diagrams instantly,
             refine the details, and export crisp visuals in the format you need.
           </p>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button size="lg" asChild className="w-full gap-2 sm:w-auto">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button size="lg" asChild className="gap-2">
               <Link href="/editor">
                 Start Creating
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="w-full sm:w-auto"
-            >
+            <Button size="lg" variant="secondary" asChild>
               <a href="#examples">Explore Examples</a>
             </Button>
           </div>
 
-          <p className="mt-4 text-xs text-muted-foreground">
-            No account required · Everything runs in your browser
+          <dl className="mt-12 max-w-xl">
+            {SPEC_ROWS.map((row) => (
+              <div
+                key={row.label}
+                className="border-t border-border py-4 last:border-b"
+              >
+                <dt className="label-mono text-muted-foreground">{row.label}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-foreground">
+                  {row.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            No account required · Runs in your browser
           </p>
         </div>
 
-        <div className="mt-14">
-          <HeroPreview />
-        </div>
+        {/* Right: live result panel */}
+        <HeroPreview />
       </div>
     </section>
   );

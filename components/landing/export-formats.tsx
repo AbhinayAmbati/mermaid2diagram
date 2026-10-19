@@ -1,65 +1,68 @@
-import { FileCode2, FileImage, FileText, FileType2, ImageDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const FORMATS = [
   {
-    icon: FileCode2,
     label: "SVG",
     body: "Vector output with embedded styles — infinitely scalable and print-ready.",
+    meta: "vector",
   },
   {
-    icon: ImageDown,
     label: "PNG",
     body: "Lossless raster at 1×, 2× or 3×, with optional transparency.",
+    meta: "1× / 2× / 3×",
   },
   {
-    icon: FileText,
     label: "PDF",
     body: "Fitted to an A4 page in portrait or landscape, with a background option.",
+    meta: "A4",
   },
   {
-    icon: FileImage,
     label: "JPEG",
     body: "Compact raster with a solid background for quick sharing.",
+    meta: "raster",
   },
   {
-    icon: FileType2,
-    label: "Mermaid source",
+    label: "MMD",
     body: "Download the original .mmd file so the diagram stays editable.",
+    meta: "source",
   },
 ];
 
 export function ExportFormats() {
   return (
-    <section id="formats" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <section id="formats" className="px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1320px]">
         <div className="max-w-2xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="label-mono text-muted-foreground">05 / Exports</span>
+          <h2 className="mt-4 text-[1.75rem] font-medium leading-tight tracking-[-0.02em] sm:text-[2.25rem]">
             Export in the format you need
           </h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Every format produces a genuine file of that type — nothing is
             renamed or faked, and nothing leaves your device.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {FORMATS.map((format) => {
-            const Icon = format.icon;
-            return (
-              <div
-                key={format.label}
-                className="rounded-xl border border-border bg-card p-5 shadow-subtle"
-              >
-                <div className="flex items-center gap-2">
-                  <Icon className="h-4 w-4 text-primary" />
-                  <h3 className="text-sm font-semibold">{format.label}</h3>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {format.body}
-                </p>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {FORMATS.map((format) => (
+            <div
+              key={format.label}
+              className="group flex flex-col justify-between bg-card p-7 transition-colors hover:bg-accent/50"
+            >
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-2xl font-medium tracking-tight">
+                  {format.label}
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
               </div>
-            );
-          })}
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                {format.body}
+              </p>
+              <span className="label-mono-sm mt-5 text-muted-foreground">
+                {format.meta}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

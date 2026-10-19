@@ -17,24 +17,26 @@ const DIAGRAM_TYPES = [
 
 export function DiagramTypes() {
   return (
-    <section id="diagram-types" className="border-b border-border bg-secondary/40">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <section id="diagram-types" className="px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1320px]">
         <div className="max-w-2xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="label-mono text-muted-foreground">04 / Coverage</span>
+          <h2 className="mt-4 text-[1.75rem] font-medium leading-tight tracking-[-0.02em] sm:text-[2.25rem]">
             Every diagram Mermaid supports
           </h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             The editor renders whatever the installed Mermaid version supports —
             here are the types you are most likely to reach for.
           </p>
         </div>
 
-        <ul className="mt-8 flex flex-wrap gap-2">
+        <ul className="mt-10 flex flex-wrap gap-2">
           {DIAGRAM_TYPES.map((type) => (
             <li
               key={type}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-sm text-foreground shadow-subtle"
+              className="inline-flex items-center gap-2 rounded-sm border border-border bg-card px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-foreground transition-colors hover:border-foreground"
             >
+              <span className="h-1 w-1 rounded-full bg-primary" />
               {type}
             </li>
           ))}

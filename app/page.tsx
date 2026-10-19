@@ -1,3 +1,4 @@
+import { BlueprintSection } from "@/components/landing/blueprint-section";
 import { FinalCta } from "@/components/landing/cta";
 import { DiagramTypes } from "@/components/landing/diagram-types";
 import { ExampleGallery } from "@/components/landing/example-gallery";
@@ -13,6 +14,7 @@ export default function LandingPage() {
       <SiteHeader />
       <main>
         <Hero />
+        <BlueprintSection />
         <FeatureGrid />
         <DiagramTypes />
         <ExportFormats />

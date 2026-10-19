@@ -1,70 +1,66 @@
 import Link from "next/link";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 
-import { Logo } from "@/components/layout/logo";
+import { BrandLockup } from "@/components/layout/logo";
+import { NavDivider, NavLink, NavPill } from "@/components/layout/nav-pill";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
+  { href: "#engine", label: "Engine" },
   { href: "#features", label: "Features" },
-  { href: "#diagram-types", label: "Diagram types" },
   { href: "#formats", label: "Exports" },
   { href: "#examples", label: "Examples" },
 ];
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-primary">
-            <Logo />
-          </span>
-          <span className="text-sm font-semibold tracking-tight">
-            Mermaid Studio
-          </span>
-          <Badge variant="soft" className="hidden sm:inline-flex">
-            BETA
-          </Badge>
+    <header className="sticky top-0 z-40 px-3 py-3 sm:px-4 sm:py-4">
+      <NavPill>
+        <Link
+          href="/"
+          className="flex items-center rounded-pill py-1 pl-1.5 pr-2.5 transition-opacity hover:opacity-85"
+        >
+          <BrandLockup />
         </Link>
 
-        <nav className="ml-6 hidden items-center gap-1 md:flex">
+        <NavDivider />
+
+        <nav className="hidden items-center lg:flex">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-            >
+            <NavLink key={link.href} href={link.href}>
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            asChild
-            aria-label="View source on GitHub"
+        <NavDivider />
+
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          asChild
+          aria-label="View source on GitHub"
+          className="rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground"
+        >
+          <a
+            href="https://github.com/AbhinayAmbati/mermaid2diagram"
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            <a
-              href="https://github.com/AbhinayAmbati/mermaid2diagram"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <Github className="h-4 w-4" />
-            </a>
-          </Button>
-          <ThemeToggle />
-          <Button size="sm" asChild className="gap-1.5">
-            <Link href="/editor">
-              Open editor
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
+            <Github className="h-4 w-4" />
+          </a>
+        </Button>
+
+        <ThemeToggle />
+
+        <Button size="sm" asChild className="ml-1 gap-1.5 rounded-pill">
+          <Link href="/editor">
+            Open editor
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </Button>
+      </NavPill>
     </header>
   );
 }

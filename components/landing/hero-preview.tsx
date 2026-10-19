@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 
 import { DEFAULT_SETTINGS, buildMermaidConfig } from "@/lib/mermaid/config";
 import { nextRenderId, renderDiagram } from "@/lib/mermaid/render";
@@ -12,9 +12,16 @@ const DEMO_SOURCE = `flowchart LR
     B -->|No| D[See the error]
     C --> E[Export]`;
 
+const EXPORT_ROWS = [
+  { label: "SVG", note: "vector, print-ready", value: "∞" },
+  { label: "PNG", note: "1× · 2× · 3×", value: "3×" },
+  { label: "PDF", note: "A4, portrait or landscape", value: "A4" },
+  { label: "Source", note: ".mmd, still editable", value: ".mmd" },
+];
+
 /**
- * The hero's live demonstration: real Mermaid source rendered by the very same
- * engine the editor uses (no mockup, no screenshot).
+ * The hero's result panel: a dark, chamfered card holding the real, live
+ * Mermaid render — the same engine the editor uses, not a screenshot.
  */
 export function HeroPreview() {
   const [svg, setSvg] = React.useState<string | null>(null);
@@ -39,39 +46,77 @@ export function HeroPreview() {
   }, []);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-pop">
-      <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="ml-2 font-mono text-2xs text-muted-foreground">
-          diagram.mmd
-        </span>
+    <div className="chamfer-lg-tl-br bg-panel p-5 text-on-panel sm:p-8">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-6">
+        <div>
+          <span className="label-mono text-on-panel-muted">Live preview</span>
+          <p className="mt-3 max-w-[15rem] text-[1.5rem] font-medium leading-tight tracking-tight text-on-panel/85">
+            Your diagram, rendered as you type.
+          </p>
+        </div>
+        <div className="text-right">
+          <div className="flex items-center justify-end gap-2">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            <span className="font-mono text-[2.5rem] font-medium leading-none tracking-tight text-on-panel">
+              5
+            </span>
+          </div>
+          <span className="label-mono-sm mt-2 block text-on-panel-muted">
+            Export formats
+          </span>
+        </div>
       </div>
-      <div className="grid md:grid-cols-2">
-        <pre className="overflow-x-auto border-b border-border bg-secondary/50 p-4 text-xs leading-relaxed md:border-b-0 md:border-r">
-          <code className="font-mono text-foreground">{DEMO_SOURCE}</code>
-        </pre>
-        <div className="flex min-h-[220px] items-center justify-center bg-white p-4">
+
+      {/* Divider with lime signal */}
+      <div className="relative my-7 h-px w-full bg-panel-line">
+        <span className="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-primary" />
+      </div>
+
+      {/* The actual rendered diagram */}
+      <div className="relative overflow-hidden rounded-md bg-white">
+        <div className="blueprint-grid absolute inset-0 opacity-[0.06]" aria-hidden />
+        <div className="relative flex min-h-[220px] items-center justify-center p-6">
           {svg ? (
             <div
-              className="mermaid-canvas [&_svg]:max-w-full [&_svg]:h-auto"
+              className="mermaid-canvas [&_svg]:h-auto [&_svg]:max-w-full"
               dangerouslySetInnerHTML={{ __html: svg }}
             />
           ) : (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[#0c1a15]/60">
               {failed ? (
                 <span>Preview unavailable</span>
               ) : (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                  Rendering…
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  Rendering
                 </>
               )}
             </div>
           )}
         </div>
+        <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm bg-panel/90 px-2 py-1">
+          <Check className="h-3 w-3 text-primary" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-on-panel">
+            Rendered locally
+          </span>
+        </div>
       </div>
+
+      {/* Format rows */}
+      <dl className="mt-7 space-y-3">
+        {EXPORT_ROWS.map((row) => (
+          <div key={row.label} className="flex items-baseline justify-between gap-4">
+            <dt className="text-[0.9375rem] text-on-panel">
+              <span className="font-medium">{row.label}</span>{" "}
+              <span className="text-on-panel-muted">({row.note})</span>
+            </dt>
+            <dd className="font-mono text-[0.9375rem] text-on-panel-muted">
+              {row.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   );
 }
