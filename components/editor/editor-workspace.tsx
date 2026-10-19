@@ -261,7 +261,7 @@ export function EditorWorkspace() {
               direction="horizontal"
               autoSaveId="mermaid2diagram-split"
             >
-              <ResizablePanel defaultSize={40} minSize={22} className="min-w-0">
+              <ResizablePanel defaultSize={40} minSize={30} className="min-w-0">
                 {editorPanel}
               </ResizablePanel>
               <ResizableHandle withHandle />

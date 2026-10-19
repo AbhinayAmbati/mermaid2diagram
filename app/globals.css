@@ -367,6 +367,14 @@
   .marquee-row:hover .marquee-right {
     animation-play-state: paused;
   }
+
+  /*
+   * The editor toolbar adapts to the width of its own panel rather than the
+   * viewport, so its controls stay reachable when the split is dragged narrow.
+   */
+  .toolbar-scope {
+    container-type: inline-size;
+  }
 }
 
 @keyframes marquee-left {
@@ -384,6 +392,18 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@container (max-width: 560px) {
+  .toolbar-optional-1 {
+    display: none;
+  }
+}
+
+@container (max-width: 440px) {
+  .toolbar-optional-2 {
+    display: none;
   }
 }
 
@@ -445,7 +465,7 @@
 }
 .cm-editor .cm-selectionBackground,
 .cm-editor.cm-focused .cm-selectionBackground {
-  background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+  background: color-mix(in srgb, var(--primary) 62%, transparent) !important;
 }
 .cm-editor .cm-cursor {
   border-left-color: var(--caret) !important;

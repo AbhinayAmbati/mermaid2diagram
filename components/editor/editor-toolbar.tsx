@@ -2,9 +2,9 @@
 
 import {
   Check,
-  ChevronsDownUp,
-  ChevronsUpDown,
   Copy,
+  PanelLeftClose,
+  PanelLeftOpen,
   Redo2,
   RotateCcw,
   Undo2,
@@ -30,6 +30,11 @@ export interface EditorToolbarProps {
   className?: string;
 }
 
+/**
+ * The toolbar is scoped as a container: as the split is dragged narrow the
+ * title truncates first, then the badges drop away, but the action icons are
+ * never pushed out of view.
+ */
 export function EditorToolbar({
   diagramType,
   copied,
@@ -44,19 +49,25 @@ export function EditorToolbar({
   return (
     <div
       className={cn(
-        "flex h-12 shrink-0 items-center gap-2 border-b border-border px-4",
+        "toolbar-scope flex h-12 shrink-0 items-center gap-2 border-b border-border px-4",
         className
       )}
     >
-      <span className="label-mono text-muted-foreground">Mermaid Code</span>
-      <Badge variant="outline">mermaid</Badge>
+      <span className="label-mono min-w-0 flex-1 truncate text-muted-foreground">
+        Mermaid Code
+      </span>
+
+      <Badge variant="outline" className="toolbar-optional-1 shrink-0">
+        mermaid
+      </Badge>
+
       {diagramType && diagramType !== "Unknown" && (
-        <Badge variant="soft" className="hidden sm:inline-flex">
+        <Badge variant="soft" className="toolbar-optional-2 shrink-0">
           {diagramType}
         </Badge>
       )}
 
-      <div className="ml-auto flex items-center gap-0.5">
+      <div className="flex shrink-0 items-center gap-0.5">
         <TooltipButton label="Undo (⌘Z)">
           <Button
             variant="ghost"
@@ -120,9 +131,9 @@ export function EditorToolbar({
             className="hidden md:inline-flex"
           >
             {collapsed ? (
-              <ChevronsDownUp className="h-4 w-4" />
+              <PanelLeftOpen className="h-4 w-4" />
             ) : (
-              <ChevronsUpDown className="h-4 w-4" />
+              <PanelLeftClose className="h-4 w-4" />
             )}
           </Button>
         </TooltipButton>
