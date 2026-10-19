@@ -26,12 +26,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-[1320px] items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
         {/* Left: statement */}
         <div className="pt-4 lg:pt-14">
-          <span className="label-mono inline-flex items-center gap-2 text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            Mermaid Studio
-          </span>
-
-          <h1 className="mt-5 text-balance text-[2.5rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+          <h1 className="text-balance text-[2.5rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
             From Mermaid Code to{" "}
             <span className="text-muted-foreground/45">
               Beautiful Diagrams.
