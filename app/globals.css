@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Monochrome + electric blue design system */
+    --background: #ffffff;
+    --foreground: #111318;
+    --card: #ffffff;
+    --card-foreground: #111318;
+    --popover: #ffffff;
+    --popover-foreground: #111318;
+
+    --primary: #2563ff;
+    --primary-hover: #1747d1;
+    --primary-foreground: #ffffff;
+
+    --secondary: #f7f8fa;
+    --secondary-foreground: #111318;
+
+    --muted: #f7f8fa;
+    --muted-foreground: #646b78;
+
+    --accent: #eef4ff;
+    --accent-foreground: #1747d1;
+    --soft: #eef4ff;
+
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --success: #16a34a;
+    --success-foreground: #ffffff;
+
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #2563ff;
+
+    --grid-dot: #d7dae0;
+    --editor-bg: #ffffff;
+    --editor-gutter: #f7f8fa;
+    --editor-line-highlight: #eef4ff;
+
+    /* Fonts (populated by the Geist font loader on <html>) */
+    --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, sans-serif);
+    --font-mono: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  }
+
+  .dark {
+    --background: #0a0b0d;
+    --foreground: #f4f5f7;
+    --card: #111318;
+    --card-foreground: #f4f5f7;
+    --popover: #111318;
+    --popover-foreground: #f4f5f7;
+
+    --primary: #3b74ff;
+    --primary-hover: #5589ff;
+    --primary-foreground: #ffffff;
+
+    --secondary: #16181d;
+    --secondary-foreground: #f4f5f7;
+
+    --muted: #16181d;
+    --muted-foreground: #9ba1ad;
+
+    --accent: #16233f;
+    --accent-foreground: #9db8ff;
+    --soft: #16233f;
+
+    --destructive: #f0554d;
+    --destructive-foreground: #ffffff;
+    --success: #34d399;
+    --success-foreground: #04140c;
+
+    --border: #23262d;
+    --input: #23262d;
+    --ring: #3b74ff;
+
+    --grid-dot: #262a31;
+    --editor-bg: #0d0f12;
+    --editor-gutter: #0d0f12;
+    --editor-line-highlight: #16233f;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--primary) 22%, transparent);
+  }
+
+  /* Refined focus ring used across interactive elements */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted-foreground);
+  }
+}
+
+@layer utilities {
+  .grid-bg-dots {
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .grid-bg-lines {
+    background-image: linear-gradient(to right, var(--grid-dot) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-dot) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* ---- Mermaid canvas: keep rendered diagrams crisp and un-selectable ---- */
+.mermaid-canvas svg {
+  max-width: none !important;
+  height: auto;
+  display: block;
+}
+.mermaid-canvas svg * {
+  /* prevent accidental text selection while panning */
+  user-select: none;
+}
+
+/* ---- CodeMirror theming to match the design system ---- */
+.cm-editor {
+  height: 100%;
+  background: var(--editor-bg) !important;
+  font-family: var(--font-mono), ui-monospace, monospace !important;
+  font-size: 13px;
+}
+.cm-editor.cm-focused {
+  outline: none !important;
+}
+.cm-editor .cm-scroller {
+  font-family: var(--font-mono), ui-monospace, monospace !important;
+  line-height: 1.6;
+}
+.cm-editor .cm-gutters {
+  background: var(--editor-gutter) !important;
+  border-right: 1px solid var(--border) !important;
+  color: var(--muted-foreground) !important;
+}
+.cm-editor .cm-activeLine {
+  background: var(--editor-line-highlight) !important;
+}
+.cm-editor .cm-activeLineGutter {
+  background: var(--editor-line-highlight) !important;
+  color: var(--foreground) !important;
+}
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground {
+  background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+.cm-editor .cm-cursor {
+  border-left-color: var(--primary) !important;
+  border-left-width: 2px !important;
+}
