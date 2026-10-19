@@ -49,7 +49,6 @@ export function DiagramCanvas({
 
   const wrapperRef = React.useRef<ReactZoomPanPinchRef | null>(null);
   const surfaceRef = React.useRef<HTMLDivElement | null>(null);
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const prevSvgRef = React.useRef<string | null>(null);
 
   const [scale, setScale] = React.useState(1);
@@ -83,25 +82,28 @@ export function DiagramCanvas({
     prevSvgRef.current = svg;
   }, [svg, fitToScreen]);
 
-  React.useEffect(() => {
-    const onChange = () => {
-      setIsFullscreen(document.fullscreenElement === containerRef.current);
-    };
-    document.addEventListener("fullscreenchange", onChange);
-    return () => document.removeEventListener("fullscreenchange", onChange);
+  /*
+   * Fullscreen is a fixed overlay rather than the browser Fullscreen API.
+   * Native fullscreen hides every element outside the fullscreen node, which
+   * would make the appearance sheet, the export dialog and the toasts
+   * unreachable while fullscreen is active. An in-app overlay keeps them
+   * working, and Escape still leaves.
+   */
+  const toggleFullscreen = React.useCallback(() => {
+    setIsFullscreen((value) => !value);
   }, []);
 
-  const toggleFullscreen = React.useCallback(() => {
-    const node = containerRef.current;
-    if (!node) return;
-    if (document.fullscreenElement) {
-      void document.exitFullscreen();
-    } else {
-      void node.requestFullscreen?.().catch(() => {
-        toast.error("Fullscreen is not available in this browser.");
-      });
-    }
-  }, []);
+  React.useEffect(() => {
+    if (!isFullscreen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      // A dialog or sheet is open: let it handle Escape and close first.
+      if (document.querySelector('[role="dialog"]')) return;
+      setIsFullscreen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isFullscreen]);
 
   const cycleBackground = React.useCallback(() => {
     const next =
@@ -139,8 +141,10 @@ export function DiagramCanvas({
 
   return (
     <div
-      ref={containerRef}
-      className="flex h-full w-full flex-col overflow-hidden bg-card"
+      className={cn(
+        "flex h-full w-full flex-col overflow-hidden bg-card",
+        isFullscreen && "fixed inset-0 z-40 h-dvh"
+      )}
     >
       <DiagramToolbar
         zoomPercent={Math.round(scale * 100)}

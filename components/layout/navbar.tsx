@@ -58,7 +58,7 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
   };
 
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border bg-card px-3 sm:px-4">
+    <header className="relative z-30 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-card px-3 sm:px-4">
       <Link
         href="/"
         className="flex items-center rounded-md py-1 pl-1 pr-2 transition-opacity hover:opacity-80"
