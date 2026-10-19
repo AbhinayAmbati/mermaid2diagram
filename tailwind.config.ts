@@ -55,6 +55,7 @@ const config: Config = {
         input: "var(--input)",
         ring: "var(--ring)",
         grid: "var(--grid-dot)",
+        canvas: "var(--canvas)",
 
         /* Accent surfaces, which invert with the theme */
         panel: {

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTheme } from "next-themes";
 import { Check, Loader2 } from "lucide-react";
 
 import { DEFAULT_SETTINGS, buildMermaidConfig } from "@/lib/mermaid/config";
@@ -12,6 +13,20 @@ const DEMO_SOURCE = `flowchart LR
     B -->|No| D[See the error]
     C --> E[Export]`;
 
+/**
+ * Diagram colours for the dark theme: dark nodes with a lime edge and light
+ * labels, so the diagram reads as a dark-mode drawing rather than the light
+ * preset sitting on a dark canvas.
+ */
+const DARK_DIAGRAM_THEME = {
+  primaryColor: "#14261f",
+  primaryTextColor: "#f2f4f1",
+  primaryBorderColor: "#c8f73c",
+  lineColor: "#8b9891",
+  secondaryColor: "#0c1a15",
+  tertiaryColor: "#14261f",
+};
+
 const EXPORT_ROWS = [
   { label: "SVG", note: "vector, print-ready", value: "∞" },
   { label: "PNG", note: "1× · 2× · 3×", value: "3×" },
@@ -22,20 +37,33 @@ const EXPORT_ROWS = [
 
 /**
  * The hero's result panel. It inverts with the theme, so on the dark page it
- * becomes a light card. The diagram itself always renders on a white canvas.
- * Spacing is kept tight so the hero fits one screen.
+ * becomes a light card with a dark diagram canvas inside it. Spacing is kept
+ * tight so the hero fits one screen.
  */
 export function HeroPreview() {
+  const { resolvedTheme } = useTheme();
   const [svg, setSvg] = React.useState<string | null>(null);
   const [failed, setFailed] = React.useState(false);
 
+  const isDark = resolvedTheme === "dark";
+
+  const config = React.useMemo(
+    () =>
+      buildMermaidConfig({
+        ...DEFAULT_SETTINGS,
+        canvasBackground: "transparent",
+        ...(isDark
+          ? { theme: "base" as const, themeVariables: DARK_DIAGRAM_THEME }
+          : {}),
+      }),
+    [isDark]
+  );
+
   React.useEffect(() => {
     let cancelled = false;
-    renderDiagram({
-      source: DEMO_SOURCE,
-      config: buildMermaidConfig({ ...DEFAULT_SETTINGS, canvasBackground: "white" }),
-      id: nextRenderId(),
-    })
+    setSvg(null);
+    setFailed(false);
+    renderDiagram({ source: DEMO_SOURCE, config, id: nextRenderId() })
       .then((result) => {
         if (!cancelled) setSvg(result.svg);
       })
@@ -45,7 +73,7 @@ export function HeroPreview() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [config]);
 
   return (
     <div className="chamfer-lg-tl-br bg-panel p-5 text-on-panel sm:p-6">
@@ -75,8 +103,8 @@ export function HeroPreview() {
         <span className="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-signal" />
       </div>
 
-      {/* The actual rendered diagram */}
-      <div className="relative overflow-hidden rounded-md bg-white">
+      {/* The actual rendered diagram, on a canvas that inverts with the theme */}
+      <div className="relative overflow-hidden rounded-md bg-canvas">
         <div className="grid-bg-dots absolute inset-0 opacity-70" aria-hidden />
         <div className="relative flex min-h-[170px] items-center justify-center p-4">
           {svg ? (
@@ -85,7 +113,7 @@ export function HeroPreview() {
               dangerouslySetInnerHTML={{ __html: svg }}
             />
           ) : (
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[#0c1a15]/60">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/60">
               {failed ? (
                 <span>Preview unavailable</span>
               ) : (
@@ -97,10 +125,10 @@ export function HeroPreview() {
             </div>
           )}
         </div>
-        {/* Always a dark chip, so it reads on the white diagram canvas */}
-        <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm bg-black/80 px-2 py-1">
-          <Check className="h-3 w-3 text-primary" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white">
+        {/* Chip inverts with the canvas, so it reads on either surface */}
+        <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm bg-foreground px-2 py-1">
+          <Check className="h-3 w-3 text-signal" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-background">
             Rendered locally
           </span>
         </div>

@@ -68,6 +68,9 @@
 
     --grid-dot: #d9ddd3;
 
+    /* Diagram canvas surface, which inverts with the theme */
+    --canvas: #ffffff;
+
     /* Editor */
     --editor-bg: #ffffff;
     --editor-gutter: #f7f8f5;
@@ -132,6 +135,8 @@
     --nav-hover: rgba(16, 22, 19, 0.07);
 
     --grid-dot: #24382e;
+
+    --canvas: #0c1a15;
 
     --editor-bg: #0d1b16;
     --editor-gutter: #0d1b16;
