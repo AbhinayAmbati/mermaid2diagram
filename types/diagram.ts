@@ -35,7 +35,14 @@ export interface MermaidConfig {
   suppressErrorRendering?: boolean;
   fontFamily?: string;
   fontSize?: number;
-  flowchart?: { padding?: number; useMaxWidth?: boolean; htmlLabels?: boolean };
+  flowchart?: {
+    padding?: number;
+    useMaxWidth?: boolean;
+    htmlLabels?: boolean;
+    nodeSpacing?: number;
+    rankSpacing?: number;
+    diagramPadding?: number;
+  };
   sequence?: { useMaxWidth?: boolean; wrap?: boolean };
   gantt?: { useMaxWidth?: boolean };
   class?: { useMaxWidth?: boolean; htmlLabels?: boolean };

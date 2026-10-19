@@ -49,7 +49,7 @@ export function DiagramCanvas({
 
   const wrapperRef = React.useRef<ReactZoomPanPinchRef | null>(null);
   const surfaceRef = React.useRef<HTMLDivElement | null>(null);
-  const prevSvgRef = React.useRef<string | null>(null);
+  const prevSizeRef = React.useRef<{ w: number; h: number } | null>(null);
 
   const [scale, setScale] = React.useState(1);
   const [copied, setCopied] = React.useState(false);
@@ -72,15 +72,27 @@ export function DiagramCanvas({
     wrapper.centerView(Math.max(0.1, target), 200, "easeOut");
   }, [svgWidth, svgHeight]);
 
-  // Auto-fit the very first successful render so the diagram is framed nicely.
+  /*
+   * Refit whenever the diagram's intrinsic size changes materially, which is
+   * what happens when a different example is loaded. Small size changes, from
+   * editing the code, leave the user's own zoom and pan untouched. Without
+   * this, swapping a small diagram for a large one kept the old transform and
+   * could leave the new diagram mostly or entirely off screen.
+   */
   React.useEffect(() => {
-    if (svg && !prevSvgRef.current) {
-      const timer = setTimeout(fitToScreen, 60);
-      prevSvgRef.current = svg;
-      return () => clearTimeout(timer);
-    }
-    prevSvgRef.current = svg;
-  }, [svg, fitToScreen]);
+    if (!svg || svgWidth <= 0 || svgHeight <= 0) return;
+    const prev = prevSizeRef.current;
+    prevSizeRef.current = { w: svgWidth, h: svgHeight };
+
+    const materiallyDifferent =
+      !prev ||
+      Math.abs(prev.w - svgWidth) / Math.max(prev.w, 1) > 0.1 ||
+      Math.abs(prev.h - svgHeight) / Math.max(prev.h, 1) > 0.1;
+    if (!materiallyDifferent) return;
+
+    const timer = setTimeout(fitToScreen, 60);
+    return () => clearTimeout(timer);
+  }, [svg, svgWidth, svgHeight, fitToScreen]);
 
   /*
    * Fullscreen is a fixed overlay rather than the browser Fullscreen API.
@@ -194,7 +206,7 @@ export function DiagramCanvas({
               contentStyle={{ width: "fit-content", height: "fit-content" }}
             >
               <div
-                className="mermaid-canvas p-10"
+                className="mermaid-canvas-pan p-10"
                 // Mermaid renders with securityLevel "strict", which sanitises
                 // every user-supplied label before it reaches this markup.
                 dangerouslySetInnerHTML={{ __html: svg }}

@@ -432,13 +432,31 @@
   }
 }
 
-/* ---- Mermaid canvas ---- */
+/* ---- Mermaid diagrams ---- */
+/*
+ * Display contexts (landing panels, previews) scale the diagram down to fit
+ * their container instead of letting it overflow and clip.
+ */
 .mermaid-canvas svg {
-  max-width: none !important;
+  max-width: 100%;
   height: auto;
   display: block;
 }
 .mermaid-canvas svg * {
+  user-select: none;
+}
+
+/*
+ * The editor canvas keeps the diagram at its natural size: pan and zoom handle
+ * anything larger than the viewport, and shrinking it here would make
+ * fit-to-screen compute the wrong scale.
+ */
+.mermaid-canvas-pan svg {
+  max-width: none !important;
+  height: auto;
+  display: block;
+}
+.mermaid-canvas-pan svg * {
   user-select: none;
 }
 

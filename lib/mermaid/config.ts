@@ -138,7 +138,17 @@ export function buildMermaidConfig(settings: DiagramSettings): MermaidConfig {
     suppressErrorRendering: true,
     fontFamily: settings.fontFamily,
     fontSize: settings.fontSize,
-    flowchart: { useMaxWidth, htmlLabels: false, padding: settings.padding },
+    flowchart: {
+      useMaxWidth,
+      htmlLabels: false,
+      padding: settings.padding,
+      // A roomier layout: more space between sibling nodes and between ranks,
+      // so nodes are not crowded and the edges running between them stay
+      // legible rather than tangled.
+      nodeSpacing: 64,
+      rankSpacing: 72,
+      diagramPadding: 16,
+    },
     sequence: { useMaxWidth, wrap: true },
     gantt: { useMaxWidth },
     class: { useMaxWidth, htmlLabels: false },

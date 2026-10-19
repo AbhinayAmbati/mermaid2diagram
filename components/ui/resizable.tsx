@@ -13,6 +13,11 @@ const ResizablePanelGroup = ({
 
 const ResizablePanel = Panel;
 
+/**
+ * The split handle is a gutter with an always-visible divider line plus a grip
+ * in the middle, so it is obvious that the panes can be dragged. Both light up
+ * in the accent colour on hover and while dragging.
+ */
 const ResizableHandle = ({
   withHandle,
   className,
@@ -22,15 +27,20 @@ const ResizableHandle = ({
 }) => (
   <PanelResizeHandle
     className={cn(
-      "group relative flex w-px items-center justify-center bg-border transition-colors data-[resize-handle-state=hover]:bg-foreground/40 data-[resize-handle-state=drag]:bg-primary",
+      "group relative flex w-1.5 shrink-0 cursor-col-resize items-center justify-center bg-card",
       className
     )}
     {...props}
   >
+    <span
+      aria-hidden
+      className="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-border transition-colors group-hover:bg-primary group-data-[resize-handle-state=drag]:bg-primary"
+    />
     {withHandle && (
-      <div className="z-10 flex h-9 w-3 items-center justify-center rounded-full border border-border bg-card opacity-0 transition-opacity group-hover:opacity-100 group-data-[resize-handle-state=drag]:opacity-100">
-        <div className="h-3.5 w-px bg-muted-foreground/60" />
-      </div>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 h-10 w-[3px] -translate-y-1/2 rounded-full bg-border transition-colors group-hover:bg-primary group-data-[resize-handle-state=drag]:bg-primary"
+      />
     )}
   </PanelResizeHandle>
 );

@@ -19,6 +19,13 @@ describe("buildMermaidConfig", () => {
     expect(config.class?.htmlLabels).toBe(false);
   });
 
+  it("lays flowcharts out with generous spacing between nodes and ranks", () => {
+    const config = buildMermaidConfig(DEFAULT_SETTINGS);
+    expect(config.flowchart?.nodeSpacing).toBeGreaterThanOrEqual(60);
+    expect(config.flowchart?.rankSpacing).toBeGreaterThanOrEqual(70);
+    expect(config.flowchart?.diagramPadding).toBeGreaterThanOrEqual(16);
+  });
+
   it("maps settings onto theme variables", () => {
     const config = buildMermaidConfig({
       ...DEFAULT_SETTINGS,
