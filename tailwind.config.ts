@@ -11,7 +11,7 @@ const config: Config = {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: { "2xl": "1280px" },
+      screens: { "2xl": "1320px" },
     },
     extend: {
       colors: {
@@ -55,11 +55,32 @@ const config: Config = {
         input: "var(--input)",
         ring: "var(--ring)",
         grid: "var(--grid-dot)",
+
+        /* Always-dark accent surfaces */
+        panel: {
+          DEFAULT: "var(--dark)",
+          2: "var(--dark-2)",
+        },
+        "on-panel": "var(--on-dark)",
+        "on-panel-muted": "var(--on-dark-muted)",
+        "panel-line": "var(--on-dark-line)",
+
+        /* Floating navigation pill */
+        nav: {
+          DEFAULT: "var(--nav)",
+          foreground: "var(--nav-foreground)",
+          muted: "var(--nav-muted)",
+          line: "var(--nav-line)",
+          hover: "var(--nav-hover)",
+        },
       },
       borderRadius: {
-        lg: "12px",
+        sm: "6px",
         md: "10px",
-        sm: "8px",
+        lg: "14px",
+        xl: "18px",
+        "2xl": "26px",
+        pill: "999px",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
@@ -68,9 +89,13 @@ const config: Config = {
       fontSize: {
         "2xs": ["0.6875rem", { lineHeight: "1rem" }],
       },
+      letterSpacing: {
+        label: "0.14em",
+      },
       boxShadow: {
-        subtle: "0 1px 2px 0 rgb(17 19 24 / 0.04)",
-        pop: "0 8px 30px rgb(17 19 24 / 0.08), 0 2px 8px rgb(17 19 24 / 0.04)",
+        subtle: "0 1px 2px 0 rgb(12 26 21 / 0.05)",
+        pop: "0 18px 40px -12px rgb(12 26 21 / 0.22), 0 2px 8px rgb(12 26 21 / 0.06)",
+        pill: "0 14px 34px -14px rgb(12 26 21 / 0.45)",
       },
       keyframes: {
         "accordion-down": {
@@ -81,14 +106,10 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        shimmer: {
-          "100%": { transform: "translateX(100%)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        shimmer: "shimmer 1.5s infinite",
       },
     },
   },

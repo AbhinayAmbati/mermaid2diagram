@@ -2,84 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Mermaid Studio — Terminal-inspired design system.
+ *
+ * Two surfaces: an off-white "paper" light mode and a deep green-black dark
+ * mode. A single lime signal colour carries every primary action. Chrome that
+ * floats above the page (navigation, accent panels) is always dark, in both
+ * themes, which is what gives the interface its technical, instrument-like feel.
+ */
 @layer base {
   :root {
-    /* Monochrome + electric blue design system */
-    --background: #ffffff;
-    --foreground: #111318;
+    /* Surfaces */
+    --background: #f5f6f3;
+    --foreground: #101613;
     --card: #ffffff;
-    --card-foreground: #111318;
+    --card-foreground: #101613;
     --popover: #ffffff;
-    --popover-foreground: #111318;
+    --popover-foreground: #101613;
 
-    --primary: #2563ff;
-    --primary-hover: #1747d1;
-    --primary-foreground: #ffffff;
+    /* Lime signal */
+    --primary: #c8f73c;
+    --primary-hover: #b7ea24;
+    --primary-foreground: #0c1a15;
 
-    --secondary: #f7f8fa;
-    --secondary-foreground: #111318;
+    --secondary: #eceee8;
+    --secondary-foreground: #101613;
 
-    --muted: #f7f8fa;
-    --muted-foreground: #646b78;
+    --muted: #eceee8;
+    --muted-foreground: #6e7a74;
 
-    --accent: #eef4ff;
-    --accent-foreground: #1747d1;
-    --soft: #eef4ff;
+    --accent: #eef9d3;
+    --accent-foreground: #2c3a0e;
+    --soft: #eef9d3;
 
-    --destructive: #dc2626;
+    --destructive: #d5342a;
     --destructive-foreground: #ffffff;
-    --success: #16a34a;
+    --success: #1f9d55;
     --success-foreground: #ffffff;
 
-    --border: #e5e7eb;
-    --input: #e5e7eb;
-    --ring: #2563ff;
+    --border: #dfe2db;
+    --input: #dfe2db;
+    --ring: #9bd41f;
+    --caret: #101613;
 
-    --grid-dot: #d7dae0;
+    /* Always-dark accent surfaces (panels, hero cards, footers) */
+    --dark: #0c1a15;
+    --dark-2: #14261f;
+    --on-dark: #f2f4f1;
+    --on-dark-muted: #93a09a;
+    --on-dark-line: rgba(255, 255, 255, 0.12);
+
+    /* Floating navigation pill */
+    --nav: #2b2e2e;
+    --nav-foreground: #f4f5f3;
+    --nav-muted: #a9b0ad;
+    --nav-line: rgba(255, 255, 255, 0.14);
+    --nav-hover: rgba(255, 255, 255, 0.08);
+
+    --grid-dot: #d9ddd3;
+
+    /* Editor */
     --editor-bg: #ffffff;
-    --editor-gutter: #f7f8fa;
-    --editor-line-highlight: #eef4ff;
+    --editor-gutter: #f7f8f5;
+    --editor-line-highlight: #f3fadf;
+    --syn-keyword: #4f7d0d;
+    --syn-string: #2f6f4f;
+    --syn-number: #8a6d1a;
+    --syn-comment: #8a948e;
+    --syn-operator: #101613;
+    --syn-bracket: #6b7280;
+    --syn-meta: #4f7d0d;
 
-    /* Fonts (populated by the Geist font loader on <html>) */
     --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, sans-serif);
     --font-mono: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
   }
 
   .dark {
-    --background: #0a0b0d;
-    --foreground: #f4f5f7;
-    --card: #111318;
-    --card-foreground: #f4f5f7;
-    --popover: #111318;
-    --popover-foreground: #f4f5f7;
+    --background: #0b1a15;
+    --foreground: #f2f4f1;
+    --card: #10231c;
+    --card-foreground: #f2f4f1;
+    --popover: #10231c;
+    --popover-foreground: #f2f4f1;
 
-    --primary: #3b74ff;
-    --primary-hover: #5589ff;
-    --primary-foreground: #ffffff;
+    --primary: #c8f73c;
+    --primary-hover: #d6ff5a;
+    --primary-foreground: #0c1a15;
 
-    --secondary: #16181d;
-    --secondary-foreground: #f4f5f7;
+    --secondary: #172b23;
+    --secondary-foreground: #f2f4f1;
 
-    --muted: #16181d;
-    --muted-foreground: #9ba1ad;
+    --muted: #172b23;
+    --muted-foreground: #93a09a;
 
-    --accent: #16233f;
-    --accent-foreground: #9db8ff;
-    --soft: #16233f;
+    --accent: #1d3327;
+    --accent-foreground: #c8f73c;
+    --soft: #1d3327;
 
-    --destructive: #f0554d;
-    --destructive-foreground: #ffffff;
-    --success: #34d399;
+    --destructive: #ff6b5e;
+    --destructive-foreground: #1a0b09;
+    --success: #4ade80;
     --success-foreground: #04140c;
 
-    --border: #23262d;
-    --input: #23262d;
-    --ring: #3b74ff;
+    --border: #22332b;
+    --input: #22332b;
+    --ring: #c8f73c;
+    --caret: #c8f73c;
 
-    --grid-dot: #262a31;
-    --editor-bg: #0d0f12;
-    --editor-gutter: #0d0f12;
-    --editor-line-highlight: #16233f;
+    --dark: #0b1a15;
+    --dark-2: #14261f;
+    --on-dark: #f2f4f1;
+    --on-dark-muted: #93a09a;
+    --on-dark-line: rgba(255, 255, 255, 0.12);
+
+    --nav: #17231e;
+    --nav-foreground: #f4f5f3;
+    --nav-muted: #9aa5a0;
+    --nav-line: rgba(255, 255, 255, 0.12);
+    --nav-hover: rgba(255, 255, 255, 0.07);
+
+    --grid-dot: #24382e;
+
+    --editor-bg: #0d1b16;
+    --editor-gutter: #0d1b16;
+    --editor-line-highlight: #16301f;
+    --syn-keyword: #c8f73c;
+    --syn-string: #86d9a8;
+    --syn-number: #e3c46a;
+    --syn-comment: #6f7d76;
+    --syn-operator: #e6eae6;
+    --syn-bracket: #9aa5a0;
+    --syn-meta: #c8f73c;
   }
 
   * {
@@ -97,16 +150,22 @@
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--primary) 22%, transparent);
+    background-color: var(--primary);
+    color: var(--primary-foreground);
   }
 
-  /* Refined focus ring used across interactive elements */
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
-  /* Scrollbars */
+  /* Headlines use tight tracking to echo the reference's grotesque display type */
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
@@ -129,7 +188,107 @@
   }
 }
 
+@layer components {
+  /*
+   * Uppercase monospace label — the signature detail of the reference: every
+   * button, eyebrow and piece of metadata is set this way.
+   */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .label-mono-sm {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Hairline rule used to divide metadata blocks */
+  .rule-hair {
+    height: 1px;
+    width: 100%;
+    background: var(--border);
+  }
+}
+
 @layer utilities {
+  /* ---- Chamfered panels: the angular cut corners of the dark accent cards ---- */
+  .chamfer-tl {
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
+  }
+  .chamfer-tr {
+    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%);
+  }
+  .chamfer-bl {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+  }
+  .chamfer-br {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  }
+  .chamfer-tl-br {
+    clip-path: polygon(
+      30px 0,
+      100% 0,
+      100% calc(100% - 30px),
+      calc(100% - 30px) 100%,
+      0 100%,
+      0 30px
+    );
+  }
+  .chamfer-tl-bl {
+    clip-path: polygon(
+      30px 0,
+      100% 0,
+      100% 100%,
+      30px 100%,
+      0 calc(100% - 30px),
+      0 30px
+    );
+  }
+
+  /* Larger cuts for full-bleed hero and section panels */
+  .chamfer-lg-tl {
+    clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%, 0 48px);
+  }
+  .chamfer-lg-tr {
+    clip-path: polygon(0 0, calc(100% - 48px) 0, 100% 48px, 100% 100%, 0 100%);
+  }
+  .chamfer-lg-bl {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 48px 100%, 0 calc(100% - 48px));
+  }
+  .chamfer-lg-br {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), calc(100% - 48px) 100%, 0 100%);
+  }
+  .chamfer-lg-tl-br {
+    clip-path: polygon(
+      48px 0,
+      100% 0,
+      100% calc(100% - 48px),
+      calc(100% - 48px) 100%,
+      0 100%,
+      0 48px
+    );
+  }
+  .chamfer-lg-tl-bl {
+    clip-path: polygon(
+      48px 0,
+      100% 0,
+      100% 100%,
+      48px 100%,
+      0 calc(100% - 48px),
+      0 48px
+    );
+  }
+
+  /* Dotted / lined canvas backgrounds */
   .grid-bg-dots {
     background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -139,6 +298,18 @@
       linear-gradient(to bottom, var(--grid-dot) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
+  /* Blueprint grid for the dark technical panels */
+  .blueprint-grid {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.055) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -154,30 +325,29 @@
   }
 }
 
-/* ---- Mermaid canvas: keep rendered diagrams crisp and un-selectable ---- */
+/* ---- Mermaid canvas ---- */
 .mermaid-canvas svg {
   max-width: none !important;
   height: auto;
   display: block;
 }
 .mermaid-canvas svg * {
-  /* prevent accidental text selection while panning */
   user-select: none;
 }
 
-/* ---- CodeMirror theming to match the design system ---- */
+/* ---- CodeMirror theming ---- */
 .cm-editor {
   height: 100%;
   background: var(--editor-bg) !important;
   font-family: var(--font-mono), ui-monospace, monospace !important;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 .cm-editor.cm-focused {
   outline: none !important;
 }
 .cm-editor .cm-scroller {
   font-family: var(--font-mono), ui-monospace, monospace !important;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 .cm-editor .cm-gutters {
   background: var(--editor-gutter) !important;
@@ -193,9 +363,9 @@
 }
 .cm-editor .cm-selectionBackground,
 .cm-editor.cm-focused .cm-selectionBackground {
-  background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+  background: color-mix(in srgb, var(--primary) 45%, transparent) !important;
 }
 .cm-editor .cm-cursor {
-  border-left-color: var(--primary) !important;
+  border-left-color: var(--caret) !important;
   border-left-width: 2px !important;
 }

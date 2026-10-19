@@ -38,11 +38,14 @@ export function ConfirmDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
+          <span className="label-mono text-muted-foreground">
+            {destructive ? "Confirm action" : "Please confirm"}
+          </span>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <DialogFooter className="mt-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <DialogFooter>
+          <Button variant="ghost" onClick={() => onOpenChange(false)}>
             {cancelLabel}
           </Button>
           <Button
