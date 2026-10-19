@@ -11,16 +11,19 @@ import { cn } from "@/lib/utils";
 
 import { mermaidLanguage } from "./mermaid-language";
 
-/** Syntax colours tuned for the Mermaid grammar, using design-system tokens. */
+/**
+ * Syntax colours are driven by design tokens so the editor follows the theme:
+ * a lime signal on the deep green-black dark mode, olive-on-paper in light.
+ */
 const mermaidHighlightStyle = HighlightStyle.define([
-  { tag: t.keyword, color: "var(--primary)", fontWeight: "600" },
-  { tag: t.comment, color: "var(--muted-foreground)", fontStyle: "italic" },
-  { tag: t.string, color: "#15803d" },
-  { tag: t.number, color: "#b45309" },
-  { tag: t.operator, color: "var(--foreground)" },
-  { tag: t.variableName, color: "var(--foreground)" },
-  { tag: t.bracket, color: "#7c3aed" },
-  { tag: t.meta, color: "#7c3aed" },
+  { tag: t.keyword, color: "var(--syn-keyword)", fontWeight: "600" },
+  { tag: t.comment, color: "var(--syn-comment)", fontStyle: "italic" },
+  { tag: t.string, color: "var(--syn-string)" },
+  { tag: t.number, color: "var(--syn-number)" },
+  { tag: t.operator, color: "var(--syn-operator)" },
+  { tag: t.variableName, color: "var(--syn-operator)" },
+  { tag: t.bracket, color: "var(--syn-bracket)" },
+  { tag: t.meta, color: "var(--syn-meta)" },
 ]);
 
 const editorTheme = EditorView.theme(
@@ -29,12 +32,12 @@ const editorTheme = EditorView.theme(
       backgroundColor: "var(--editor-bg)",
       color: "var(--foreground)",
       height: "100%",
-      fontSize: "13px",
+      fontSize: "12.5px",
     },
     ".cm-content": {
       fontFamily: "var(--font-mono)",
-      padding: "10px 0 40px 0",
-      caretColor: "var(--primary)",
+      padding: "14px 0 40px 0",
+      caretColor: "var(--caret)",
     },
     ".cm-gutters": {
       backgroundColor: "var(--editor-gutter)",
@@ -43,7 +46,7 @@ const editorTheme = EditorView.theme(
       borderRight: "1px solid var(--border)",
       paddingRight: "4px",
     },
-    ".cm-lineNumbers .cm-gutterElement": { padding: "0 8px 0 12px" },
+    ".cm-lineNumbers .cm-gutterElement": { padding: "0 10px 0 14px" },
     ".cm-foldGutter .cm-gutterElement": { padding: "0 6px" },
     ".cm-activeLine": { backgroundColor: "var(--editor-line-highlight)" },
     ".cm-activeLineGutter": {
@@ -51,13 +54,13 @@ const editorTheme = EditorView.theme(
       color: "var(--foreground)",
     },
     ".cm-selectionBackground, &.cm-focused .cm-selectionBackground": {
-      backgroundColor: "color-mix(in srgb, var(--primary) 20%, transparent)",
+      backgroundColor: "color-mix(in srgb, var(--primary) 45%, transparent)",
     },
-    ".cm-cursor": { borderLeftColor: "var(--primary)", borderLeftWidth: "2px" },
+    ".cm-cursor": { borderLeftColor: "var(--caret)", borderLeftWidth: "2px" },
     ".cm-tooltip": {
       border: "1px solid var(--border)",
       backgroundColor: "var(--card)",
-      borderRadius: "8px",
+      borderRadius: "6px",
       overflow: "hidden",
     },
     ".cm-tooltip-autocomplete ul li[aria-selected]": {

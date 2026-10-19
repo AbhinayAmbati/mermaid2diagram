@@ -44,24 +44,19 @@ export function EditorToolbar({
   return (
     <div
       className={cn(
-        "flex h-11 shrink-0 items-center gap-2 border-b border-border px-3",
+        "flex h-12 shrink-0 items-center gap-2 border-b border-border px-4",
         className
       )}
     >
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium">Mermaid Code</span>
-        <Badge variant="outline" className="font-mono">
-          mermaid
-        </Badge>
-      </div>
-
-      {diagramType && diagramType !== "unknown" && (
+      <span className="label-mono text-muted-foreground">Mermaid Code</span>
+      <Badge variant="outline">mermaid</Badge>
+      {diagramType && diagramType !== "Unknown" && (
         <Badge variant="soft" className="hidden sm:inline-flex">
           {diagramType}
         </Badge>
       )}
 
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto flex items-center gap-0.5">
         <TooltipButton label="Undo (⌘Z)">
           <Button
             variant="ghost"
@@ -83,7 +78,7 @@ export function EditorToolbar({
           </Button>
         </TooltipButton>
 
-        <Separator orientation="vertical" className="mx-1 h-5" />
+        <Separator orientation="vertical" className="mx-1.5 h-5" />
 
         <TooltipButton label={copied ? "Copied" : "Copy code"}>
           <Button
@@ -93,7 +88,7 @@ export function EditorToolbar({
             aria-label="Copy Mermaid code"
           >
             {copied ? (
-              <Check className="h-4 w-4 text-success" />
+              <Check className="h-4 w-4 text-primary" />
             ) : (
               <Copy className="h-4 w-4" />
             )}
@@ -111,7 +106,7 @@ export function EditorToolbar({
           </Button>
         </TooltipButton>
 
-        <Separator orientation="vertical" className="mx-1 hidden h-5 md:block" />
+        <Separator orientation="vertical" className="mx-1.5 hidden h-5 md:block" />
 
         <TooltipButton
           label={collapsed ? "Expand editor" : "Collapse editor"}

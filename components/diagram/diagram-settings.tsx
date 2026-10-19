@@ -41,10 +41,7 @@ export interface DiagramSettingsPanelProps {
 
 const FONT_OPTIONS = [
   { value: DIAGRAM_FONT_STACK, label: "Inter / system sans" },
-  {
-    value: '"Georgia", "Times New Roman", serif',
-    label: "Serif",
-  },
+  { value: '"Georgia", "Times New Roman", serif', label: "Serif" },
   {
     value: 'ui-monospace, "SFMono-Regular", Menlo, monospace',
     label: "Monospace",
@@ -69,9 +66,9 @@ function ColorField({
   const safeValue = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value) ? value : "#000000";
   return (
     <div className="flex items-center justify-between gap-3">
-      <Label className="text-xs font-normal text-muted-foreground">{label}</Label>
-      <div className="flex items-center gap-2">
-        <span className="font-mono text-2xs uppercase text-muted-foreground">
+      <Label className="label-mono text-muted-foreground">{label}</Label>
+      <div className="flex items-center gap-2.5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
           {value}
         </span>
         <input
@@ -79,7 +76,7 @@ function ColorField({
           value={safeValue}
           onChange={(e) => onChange(e.target.value)}
           aria-label={label}
-          className="h-7 w-9 cursor-pointer rounded-md border border-border bg-transparent p-0.5"
+          className="h-7 w-9 cursor-pointer rounded-sm border border-border bg-transparent p-0.5"
         />
       </div>
     </div>
@@ -94,10 +91,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-3 border-b border-border px-5 py-4 last:border-b-0">
-      <h3 className="text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
-        {title}
-      </h3>
+    <section className="space-y-4 border-b border-border px-5 py-5 last:border-b-0">
+      <h3 className="label-mono text-muted-foreground">{title}</h3>
       {children}
     </section>
   );
@@ -115,8 +110,9 @@ export function DiagramSettingsPanel({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="flex w-full flex-col p-0 sm:max-w-md">
-        <SheetHeader className="border-b border-border px-5 py-4">
-          <SheetTitle>Appearance</SheetTitle>
+        <SheetHeader className="border-b border-border px-5 py-5">
+          <span className="label-mono text-muted-foreground">Appearance</span>
+          <SheetTitle>Diagram &amp; canvas</SheetTitle>
           <SheetDescription>
             Tune the diagram and canvas. Changes render live.
           </SheetDescription>
@@ -134,14 +130,14 @@ export function DiagramSettingsPanel({
                     onClick={() => applyPreset(preset.id)}
                     aria-pressed={active}
                     className={cn(
-                      "rounded-lg border p-3 text-left transition-colors",
+                      "rounded-md border p-3 text-left transition-colors",
                       active
-                        ? "border-primary bg-accent"
-                        : "border-border bg-card hover:bg-secondary"
+                        ? "border-foreground bg-accent"
+                        : "border-border bg-card hover:border-muted-foreground/40"
                     )}
                   >
                     <span className="block text-sm font-medium">{preset.name}</span>
-                    <span className="mt-0.5 block text-2xs leading-snug text-muted-foreground">
+                    <span className="mt-1 block text-2xs leading-snug text-muted-foreground">
                       {preset.description}
                     </span>
                   </button>
@@ -152,7 +148,7 @@ export function DiagramSettingsPanel({
 
           <Section title="Theme">
             <div className="space-y-2">
-              <Label htmlFor="mermaid-theme" className="text-xs font-normal text-muted-foreground">
+              <Label htmlFor="mermaid-theme" className="label-mono text-muted-foreground">
                 Mermaid theme
               </Label>
               <Select
@@ -175,7 +171,7 @@ export function DiagramSettingsPanel({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="font-family" className="text-xs font-normal text-muted-foreground">
+              <Label htmlFor="font-family" className="label-mono text-muted-foreground">
                 Font family
               </Label>
               <Select
@@ -195,12 +191,10 @@ export function DiagramSettingsPanel({
               </Select>
             </div>
 
-            <div className="space-y-2 pt-1">
+            <div className="space-y-3 pt-1">
               <div className="flex items-center justify-between">
-                <Label className="text-xs font-normal text-muted-foreground">
-                  Font size
-                </Label>
-                <span className="font-mono text-2xs text-muted-foreground">
+                <Label className="label-mono text-muted-foreground">Font size</Label>
+                <span className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground">
                   {settings.fontSize}px
                 </span>
               </div>
@@ -214,12 +208,12 @@ export function DiagramSettingsPanel({
               />
             </div>
 
-            <div className="space-y-2 pt-1">
+            <div className="space-y-3 pt-1">
               <div className="flex items-center justify-between">
-                <Label className="text-xs font-normal text-muted-foreground">
+                <Label className="label-mono text-muted-foreground">
                   Diagram padding
                 </Label>
-                <span className="font-mono text-2xs text-muted-foreground">
+                <span className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground">
                   {settings.padding}px
                 </span>
               </div>
@@ -235,29 +229,29 @@ export function DiagramSettingsPanel({
           </Section>
 
           <Section title="Theme variables">
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               <ColorField
                 label="Primary fill"
-                value={settings.themeVariables.primaryColor ?? "#eef4ff"}
+                value={settings.themeVariables.primaryColor ?? "#f2fbe0"}
                 onChange={(value) => updateThemeVariables({ primaryColor: value })}
               />
               <ColorField
                 label="Primary text"
-                value={settings.themeVariables.primaryTextColor ?? "#111318"}
+                value={settings.themeVariables.primaryTextColor ?? "#16220a"}
                 onChange={(value) =>
                   updateThemeVariables({ primaryTextColor: value })
                 }
               />
               <ColorField
                 label="Primary border"
-                value={settings.themeVariables.primaryBorderColor ?? "#2563ff"}
+                value={settings.themeVariables.primaryBorderColor ?? "#7fa81a"}
                 onChange={(value) =>
                   updateThemeVariables({ primaryBorderColor: value })
                 }
               />
               <ColorField
                 label="Lines & arrows"
-                value={settings.themeVariables.lineColor ?? "#2563ff"}
+                value={settings.themeVariables.lineColor ?? "#4b5a33"}
                 onChange={(value) => updateThemeVariables({ lineColor: value })}
               />
             </div>
@@ -265,7 +259,7 @@ export function DiagramSettingsPanel({
 
           <Section title="Canvas">
             <div className="space-y-2">
-              <Label htmlFor="canvas-bg" className="text-xs font-normal text-muted-foreground">
+              <Label htmlFor="canvas-bg" className="label-mono text-muted-foreground">
                 Background
               </Label>
               <Select
@@ -291,7 +285,7 @@ export function DiagramSettingsPanel({
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <Label htmlFor="show-grid" className="text-xs font-normal text-muted-foreground">
+              <Label htmlFor="show-grid" className="label-mono text-muted-foreground">
                 Show grid dots
               </Label>
               <Switch
@@ -304,7 +298,7 @@ export function DiagramSettingsPanel({
 
           <Section title="Export defaults">
             <div className="space-y-2">
-              <Label htmlFor="export-bg" className="text-xs font-normal text-muted-foreground">
+              <Label htmlFor="export-bg" className="label-mono text-muted-foreground">
                 Export background
               </Label>
               <Select
@@ -327,7 +321,7 @@ export function DiagramSettingsPanel({
             </div>
           </Section>
 
-          <div className="flex items-start gap-2 px-5 py-4 text-2xs leading-relaxed text-muted-foreground">
+          <div className="flex items-start gap-2.5 px-5 py-5 text-2xs leading-relaxed text-muted-foreground">
             <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             <p>
               Mermaid themes and theme variables apply differently per diagram
@@ -339,14 +333,14 @@ export function DiagramSettingsPanel({
 
         <div className="space-y-2 border-t border-border p-4">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             className="w-full gap-1.5"
             onClick={() => {
               updateSettings({ ...DEFAULT_SETTINGS });
             }}
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="h-3.5 w-3.5" />
             Reset appearance
           </Button>
           <Button

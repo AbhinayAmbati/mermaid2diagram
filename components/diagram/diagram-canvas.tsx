@@ -83,7 +83,6 @@ export function DiagramCanvas({
     prevSvgRef.current = svg;
   }, [svg, fitToScreen]);
 
-  // Track fullscreen state.
   React.useEffect(() => {
     const onChange = () => {
       setIsFullscreen(document.fullscreenElement === containerRef.current);
@@ -134,14 +133,14 @@ export function DiagramCanvas({
     "relative h-full w-full overflow-hidden",
     background === "white" && "bg-white",
     background === "transparent" && "bg-transparent",
-    background === "grid" && "bg-background",
+    background === "grid" && "bg-card",
     background === "grid" && settings.showGrid && "grid-bg-dots"
   );
 
   return (
     <div
       ref={containerRef}
-      className="flex h-full w-full flex-col overflow-hidden bg-background"
+      className="flex h-full w-full flex-col overflow-hidden bg-card"
     >
       <DiagramToolbar
         zoomPercent={Math.round(scale * 100)}
@@ -172,7 +171,6 @@ export function DiagramCanvas({
             : undefined
         }
       >
-        {/* Rendered diagram */}
         {svg && !isError && (
           <TransformWrapper
             ref={wrapperRef}
@@ -200,7 +198,6 @@ export function DiagramCanvas({
           </TransformWrapper>
         )}
 
-        {/* Empty state */}
         <AnimatePresence>
           {isEmpty && (
             <motion.div
@@ -210,23 +207,26 @@ export function DiagramCanvas({
               transition={{ duration: 0.2 }}
               className="absolute inset-0 flex items-center justify-center p-6"
             >
-              <div className="max-w-sm text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card text-primary shadow-subtle">
-                  <Sparkles className="h-6 w-6" />
+              <div className="w-full max-w-md rounded-xl border border-border bg-card p-8 text-center">
+                <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary text-foreground">
+                  <Sparkles className="h-4 w-4" />
                 </div>
-                <h3 className="mt-4 text-sm font-semibold">
+                <span className="label-mono mt-6 block text-muted-foreground">
+                  No diagram
+                </span>
+                <h3 className="mt-3 text-base font-semibold tracking-tight">
                   Nothing to preview yet
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   Write or paste Mermaid code in the editor, or start from a
                   ready-made example.
                 </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
                   <Button size="sm" onClick={() => setSource(DEFAULT_SOURCE)}>
                     Load sample diagram
                   </Button>
                   {onFocusEditor && (
-                    <Button size="sm" variant="outline" onClick={onFocusEditor}>
+                    <Button size="sm" variant="secondary" onClick={onFocusEditor}>
                       Go to editor
                     </Button>
                   )}
@@ -236,7 +236,6 @@ export function DiagramCanvas({
           )}
         </AnimatePresence>
 
-        {/* Error state */}
         {isError && error && (
           <div className="absolute inset-0 overflow-auto">
             <RenderError
@@ -247,7 +246,6 @@ export function DiagramCanvas({
           </div>
         )}
 
-        {/* First-render loading state */}
         <AnimatePresence>
           {isRenderingFirst && (
             <motion.div
@@ -256,25 +254,28 @@ export function DiagramCanvas({
               exit={{ opacity: 0 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <div className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm text-muted-foreground shadow-subtle">
-                <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                Rendering diagram…
+              <div className="flex items-center gap-2.5 rounded-sm border border-border bg-card px-3.5 py-2.5">
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-foreground" />
+                <span className="label-mono text-muted-foreground">
+                  Rendering diagram
+                </span>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Subtle re-render indicator (previous diagram stays visible) */}
         <AnimatePresence>
           {status === "rendering" && svg && (
             <motion.div
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="pointer-events-none absolute right-3 top-3 flex items-center gap-1.5 rounded-full border border-border bg-card/90 px-2.5 py-1 text-2xs font-medium text-muted-foreground shadow-subtle backdrop-blur"
+              className="pointer-events-none absolute right-3 top-3 flex items-center gap-2 rounded-sm border border-border bg-card/95 px-2.5 py-1.5 backdrop-blur"
             >
-              <Loader2 className="h-3 w-3 animate-spin text-primary" />
-              Rendering…
+              <Loader2 className="h-3 w-3 animate-spin text-foreground" />
+              <span className="label-mono-sm text-muted-foreground">
+                Rendering
+              </span>
             </motion.div>
           )}
         </AnimatePresence>

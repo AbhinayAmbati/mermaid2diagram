@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Check,
   Copy,
   Grid3x3,
   Maximize2,
@@ -10,7 +11,6 @@ import {
   RotateCcw,
   Scan,
   Settings2,
-  Check,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -62,18 +62,18 @@ export function DiagramToolbar({
   return (
     <div
       className={cn(
-        "flex h-11 shrink-0 items-center gap-1 border-b border-border px-3",
+        "flex h-12 shrink-0 items-center gap-2 border-b border-border px-4",
         className
       )}
     >
-      <span className="text-sm font-medium">Preview</span>
-      {diagramType && diagramType !== "unknown" && (
-        <Badge variant="soft" className="ml-1 hidden sm:inline-flex">
+      <span className="label-mono text-muted-foreground">Preview</span>
+      {diagramType && diagramType !== "Unknown" && (
+        <Badge variant="soft" className="hidden sm:inline-flex">
           {diagramType}
         </Badge>
       )}
 
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto flex items-center gap-0.5">
         <TooltipButton label="Zoom out">
           <Button
             variant="ghost"
@@ -86,7 +86,7 @@ export function DiagramToolbar({
         </TooltipButton>
 
         <span
-          className="w-12 select-none text-center font-mono text-xs tabular-nums text-muted-foreground"
+          className="w-12 select-none text-center font-mono text-[11px] tracking-[0.08em] text-muted-foreground"
           aria-live="polite"
         >
           {zoomPercent}%
@@ -103,7 +103,7 @@ export function DiagramToolbar({
           </Button>
         </TooltipButton>
 
-        <Separator orientation="vertical" className="mx-1 h-5" />
+        <Separator orientation="vertical" className="mx-1.5 h-5" />
 
         <TooltipButton label="Fit to screen">
           <Button variant="ghost" size="icon-sm" onClick={onFit} aria-label="Fit to screen">
@@ -128,12 +128,12 @@ export function DiagramToolbar({
           </Button>
         </TooltipButton>
 
-        <Separator orientation="vertical" className="mx-1 hidden h-5 sm:block" />
+        <Separator orientation="vertical" className="mx-1.5 hidden h-5 sm:block" />
 
         <TooltipButton label={copied ? "SVG copied" : "Copy SVG"}>
           <Button variant="ghost" size="icon-sm" onClick={onCopySvg} aria-label="Copy SVG markup">
             {copied ? (
-              <Check className="h-4 w-4 text-success" />
+              <Check className="h-4 w-4 text-primary" />
             ) : (
               <Copy className="h-4 w-4" />
             )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { FileCode2, FileImage, FileText, FileType2, ImageDown } from "lucide-react";
+import { Check, FileCode2, FileImage, FileText, FileType2, ImageDown } from "lucide-react";
 
 import { Label } from "@/components/ui/label";
 import {
@@ -51,17 +51,25 @@ export function ExportFormatPicker({
             aria-checked={active}
             onClick={() => onChange(format.id)}
             className={cn(
-              "flex flex-col gap-1 rounded-lg border p-3 text-left transition-colors",
+              "relative flex flex-col gap-1.5 rounded-md border p-3 text-left transition-colors",
               active
-                ? "border-primary bg-accent"
-                : "border-border bg-card hover:bg-secondary"
+                ? "border-foreground bg-accent"
+                : "border-border bg-card hover:border-muted-foreground/40"
             )}
           >
+            {active && (
+              <Check className="absolute right-2.5 top-2.5 h-3.5 w-3.5 text-accent-foreground" />
+            )}
             <span className="flex items-center gap-2">
               <Icon
-                className={cn("h-4 w-4", active ? "text-primary" : "text-muted-foreground")}
+                className={cn(
+                  "h-3.5 w-3.5",
+                  active ? "text-accent-foreground" : "text-muted-foreground"
+                )}
               />
-              <span className="text-sm font-medium">{format.label}</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em]">
+                {format.label}
+              </span>
             </span>
             <span className="text-2xs leading-snug text-muted-foreground">
               {format.description}
@@ -86,8 +94,8 @@ function Segmented<T extends string | number>({
 }) {
   return (
     <div className="space-y-2">
-      <Label className="text-xs font-normal text-muted-foreground">{label}</Label>
-      <div className="inline-flex w-full rounded-lg border border-border bg-secondary p-0.5">
+      <Label className="label-mono text-muted-foreground">{label}</Label>
+      <div className="inline-flex w-full rounded-sm border border-border bg-secondary p-0.5">
         {options.map((option) => (
           <button
             key={String(option.value)}
@@ -95,9 +103,9 @@ function Segmented<T extends string | number>({
             onClick={() => onChange(option.value)}
             aria-pressed={value === option.value}
             className={cn(
-              "flex-1 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
+              "flex-1 rounded-sm px-2 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] transition-colors",
               value === option.value
-                ? "bg-background text-foreground shadow-subtle"
+                ? "bg-card text-foreground shadow-subtle"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
@@ -124,7 +132,7 @@ export function ExportOptionFields({
   const meta = EXPORT_FORMATS.find((f) => f.id === options.format)!;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {meta.supportsBackground && (
         <Segmented<ExportBackground>
           label="Background"
@@ -132,7 +140,7 @@ export function ExportOptionFields({
           onChange={(value) => onChange({ background: value })}
           options={[
             { value: "white", label: "White" },
-            { value: "transparent", label: "Transparent" },
+            { value: "transparent", label: "Clear" },
             { value: "dark", label: "Dark" },
           ]}
         />
@@ -151,9 +159,9 @@ export function ExportOptionFields({
             ]}
           />
           {diagramSize && diagramSize.width > 0 && (
-            <p className="text-2xs text-muted-foreground">
-              Output:{" "}
-              <span className="font-mono">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+              Output{" "}
+              <span className="text-foreground">
                 {Math.round(diagramSize.width * options.scale)} ×{" "}
                 {Math.round(diagramSize.height * options.scale)} px
               </span>
@@ -164,7 +172,7 @@ export function ExportOptionFields({
 
       {meta.supportsOrientation && (
         <div className="space-y-2">
-          <Label htmlFor="pdf-orientation" className="text-xs font-normal text-muted-foreground">
+          <Label htmlFor="pdf-orientation" className="label-mono text-muted-foreground">
             Page orientation
           </Label>
           <Select
