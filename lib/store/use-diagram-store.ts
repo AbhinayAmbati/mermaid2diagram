@@ -39,6 +39,8 @@ interface DiagramStore {
   clearRender: () => void;
 
   reset: (source?: string) => void;
+  /** Start an empty diagram: no code, no preview. */
+  newDiagram: () => void;
   hydrate: (payload: { source?: string; settings?: DiagramSettings }) => void;
 }
 
@@ -104,9 +106,31 @@ export const useDiagramStore = create<DiagramStore>((set) => ({
   clearRender: () =>
     set({ status: "idle", error: null, svg: null, svgWidth: 0, svgHeight: 0 }),
 
+  /**
+   * Reset the editor back to a known sample.
+   *
+   * The rendered output is deliberately left alone. The render pipeline only
+   * re-runs when the source or the settings actually change, so clearing the
+   * SVG here would strand the canvas blank whenever they did not, which is
+   * exactly what happened when the editor already held the sample.
+   */
   reset: (source = DEFAULT_SOURCE) =>
-    set({
+    set((state) => ({
       source,
+      fileName: "mermaid-diagram",
+      settings: DEFAULT_SETTINGS,
+      error: null,
+      status: state.svg ? "success" : "idle",
+    })),
+
+  /**
+   * Start a brand new diagram. The source becomes empty, which the render
+   * pipeline picks up and turns into the canvas empty state, so it is safe to
+   * clear the preview here.
+   */
+  newDiagram: () =>
+    set({
+      source: "",
       fileName: "mermaid-diagram",
       settings: DEFAULT_SETTINGS,
       svg: null,

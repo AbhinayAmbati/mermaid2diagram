@@ -20,6 +20,8 @@ export interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   destructive?: boolean;
+  /** Optional escape hatch shown on the left of the footer, e.g. save first. */
+  extraActions?: React.ReactNode;
   onConfirm: () => void;
 }
 
@@ -32,6 +34,7 @@ export function ConfirmDialog({
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
   destructive = false,
+  extraActions,
   onConfirm,
 }: ConfirmDialogProps) {
   return (
@@ -45,6 +48,7 @@ export function ConfirmDialog({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <DialogFooter>
+          {extraActions && <div className="sm:mr-auto">{extraActions}</div>}
           <Button variant="ghost" onClick={() => onOpenChange(false)}>
             {cancelLabel}
           </Button>

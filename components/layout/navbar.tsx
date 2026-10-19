@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { BookOpen, Download, FilePlus2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { BrandLockup } from "@/components/layout/logo";
 import { ExamplesMenu } from "@/components/examples/examples-menu";
@@ -11,7 +12,8 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Separator } from "@/components/ui/separator";
 import { TooltipButton } from "@/components/ui/tooltip";
-import { DEFAULT_SOURCE, type MermaidTemplate } from "@/lib/examples/templates";
+import { type MermaidTemplate } from "@/lib/examples/templates";
+import { runExport } from "@/lib/mermaid/export";
 import { useDiagramStore } from "@/lib/store/use-diagram-store";
 
 export interface NavbarProps {
@@ -30,26 +32,49 @@ export interface NavbarProps {
  */
 export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
   const source = useDiagramStore((s) => s.source);
-  const reset = useDiagramStore((s) => s.reset);
+  const fileName = useDiagramStore((s) => s.fileName);
+  const newDiagram = useDiagramStore((s) => s.newDiagram);
   const setSource = useDiagramStore((s) => s.setSource);
   const setFileName = useDiagramStore((s) => s.setFileName);
 
   const [confirmNew, setConfirmNew] = React.useState(false);
 
-  const isDirty = source.trim() !== DEFAULT_SOURCE.trim();
+  // Any code at all is worth confirming before it is erased, including the
+  // default sample the editor starts with.
+  const hasCode = source.trim().length > 0;
 
   const createNew = React.useCallback(() => {
-    reset();
+    newDiagram();
     onNewDiagram?.();
-  }, [reset, onNewDiagram]);
+  }, [newDiagram, onNewDiagram]);
 
   const handleNew = () => {
-    if (isDirty) {
+    if (hasCode) {
       setConfirmNew(true);
     } else {
       createNew();
     }
   };
+
+  /** Save the current code before it is erased. */
+  const handleDownloadSource = React.useCallback(async () => {
+    const result = await runExport({
+      svg: null,
+      source,
+      options: {
+        format: "mmd",
+        fileName,
+        scale: 1,
+        background: "white",
+        orientation: "landscape",
+      },
+    });
+    if (result.ok) {
+      toast.success(`Saved ${result.filename}`);
+    } else {
+      toast.error("Could not save the source", { description: result.error });
+    }
+  }, [source, fileName]);
 
   const handleExample = (template: MermaidTemplate) => {
     setSource(template.code);
@@ -109,10 +134,20 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
         open={confirmNew}
         onOpenChange={setConfirmNew}
         title="Start a new diagram?"
-        description="This clears the editor and any unsaved changes to your current diagram."
+        description="This erases the current code and the rendered diagram. Download the source first if you want to keep it."
         confirmLabel="New diagram"
         destructive
         onConfirm={createNew}
+        extraActions={
+          <Button
+            variant="secondary"
+            onClick={handleDownloadSource}
+            className="w-full gap-1.5 sm:w-auto"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Download source
+          </Button>
+        }
       />
     </header>
   );

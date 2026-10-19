@@ -102,7 +102,9 @@ export function EditorWorkspace() {
   React.useEffect(() => {
     if (!ready || didHydrate.current) return;
     didHydrate.current = true;
-    if (restored?.source && restored.source !== DEFAULT_SOURCE) {
+    // Restore any saved draft that differs from the starting sample. An empty
+    // string is a valid draft: it is what "New diagram" leaves behind.
+    if (restored && restored.source !== DEFAULT_SOURCE) {
       hydrate({
         source: restored.source,
         settings: restored.settings as DiagramSettings | undefined,
