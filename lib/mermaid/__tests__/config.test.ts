@@ -26,6 +26,13 @@ describe("buildMermaidConfig", () => {
     expect(config.flowchart?.diagramPadding).toBeGreaterThanOrEqual(16);
   });
 
+  it("routes flowchart edges as straight lines so they stay traceable", () => {
+    // Mermaid's default `basis` spline bundles edges together on diagrams with
+    // many cross-cluster links, which makes them impossible to follow.
+    const config = buildMermaidConfig(DEFAULT_SETTINGS);
+    expect(config.flowchart?.curve).toBe("linear");
+  });
+
   it("maps settings onto theme variables", () => {
     const config = buildMermaidConfig({
       ...DEFAULT_SETTINGS,

@@ -142,11 +142,15 @@ export function buildMermaidConfig(settings: DiagramSettings): MermaidConfig {
       useMaxWidth,
       htmlLabels: false,
       padding: settings.padding,
-      // A roomier layout: more space between sibling nodes and between ranks,
-      // so nodes are not crowded and the edges running between them stay
-      // legible rather than tangled.
-      nodeSpacing: 64,
-      rankSpacing: 72,
+      // Straight edges rather than Mermaid's default `basis` splines. The
+      // spline overshoots and bundles neighbouring edges into an unreadable
+      // mass on diagrams with several cross-cluster links, which is exactly
+      // the case straight segments fix.
+      curve: "linear",
+      // More room between sibling nodes and between ranks, so edges have
+      // space to separate instead of running on top of each other.
+      nodeSpacing: 70,
+      rankSpacing: 80,
       diagramPadding: 16,
     },
     sequence: { useMaxWidth, wrap: true },

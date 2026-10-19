@@ -25,6 +25,22 @@ export interface AppearancePreset {
   themeVariables: ThemeVariables;
 }
 
+/** Mermaid's supported flowchart edge curves. */
+export type FlowchartCurve =
+  | "basis"
+  | "linear"
+  | "step"
+  | "bumpX"
+  | "bumpY"
+  | "cardinal"
+  | "catmullRom"
+  | "monotoneX"
+  | "monotoneY"
+  | "natural"
+  | "stepAfter"
+  | "stepBefore"
+  | "rounded";
+
 /** Mermaid runtime configuration surfaced to the UI. */
 export interface MermaidConfig {
   theme: MermaidTheme;
@@ -42,6 +58,7 @@ export interface MermaidConfig {
     nodeSpacing?: number;
     rankSpacing?: number;
     diagramPadding?: number;
+    curve?: FlowchartCurve;
   };
   sequence?: { useMaxWidth?: boolean; wrap?: boolean };
   gantt?: { useMaxWidth?: boolean };
