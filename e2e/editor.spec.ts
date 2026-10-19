@@ -53,6 +53,48 @@ test.describe("mermaid2diagram editor", () => {
     expect(download.suggestedFilename()).toMatch(/\.svg$/);
   });
 
+  test("scrolls the code window when the source outgrows the panel", async ({
+    page,
+  }) => {
+    await page.goto("/editor");
+    await expect(
+      page.locator('[data-testid="diagram-canvas"] svg').first()
+    ).toBeVisible();
+
+    const editor = page.locator(".cm-content").first();
+    await editor.click();
+    await page.keyboard.press("ControlOrMeta+A");
+
+    const filler = Array.from(
+      { length: 120 },
+      (_, i) => `  %% filler line ${i + 1}`
+    ).join("\n");
+    await page.keyboard.insertText(
+      `flowchart TD\n  A[Start] --> B[End]\n${filler}`
+    );
+
+    const scroller = page.locator(".cm-scroller").first();
+
+    // The window is a scroll container rather than a box that grows.
+    const overflowY = await scroller.evaluate(
+      (el: HTMLElement) => getComputedStyle(el).overflowY
+    );
+    expect(["auto", "scroll"]).toContain(overflowY);
+
+    // The content genuinely exceeds the window...
+    expect(
+      await scroller.evaluate((el: HTMLElement) => el.scrollHeight > el.clientHeight)
+    ).toBe(true);
+
+    // ...and the window actually moves.
+    await scroller.evaluate((el: HTMLElement) => {
+      el.scrollTop = 240;
+    });
+    expect(
+      await scroller.evaluate((el: HTMLElement) => el.scrollTop)
+    ).toBeGreaterThan(0);
+  });
+
   test("loads an example template from the landing page", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("link", { name: /Basic Flowchart/ }).click();

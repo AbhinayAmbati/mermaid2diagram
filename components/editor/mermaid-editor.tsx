@@ -104,12 +104,19 @@ export function MermaidEditor({
   );
 
   return (
-    <div className={cn("h-full w-full overflow-hidden", className)}>
+    <div className={cn("flex h-full w-full flex-col overflow-hidden", className)}>
+      {/*
+        `className` lands on CodeMirror's own container div. It needs a real
+        height here: the library applies the `height` prop to `.cm-editor` as a
+        theme, so without this the editor resolves 100% against an auto-height
+        box, grows to fit its content, and never scrolls inside the panel.
+      */}
       <CodeMirror
         ref={editorRef}
         value={value}
         onChange={onChange}
         height="100%"
+        className="min-h-0 flex-1"
         theme={editorTheme}
         extensions={extensions}
         autoFocus={autoFocus}
