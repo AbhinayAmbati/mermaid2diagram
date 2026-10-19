@@ -19,26 +19,26 @@ export function ExampleGallery() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-box-line bg-box-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {TEMPLATES.map((template, index) => (
             <Link
               key={template.id}
               href={`/editor?example=${template.id}`}
-              className="group flex flex-col bg-box p-7 transition-colors hover:bg-box-hover"
+              className="group flex flex-col bg-card p-7 transition-colors hover:bg-secondary/60"
             >
               <div className="flex items-start justify-between gap-4">
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-box-muted/70">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <ArrowUpRight className="h-4 w-4 shrink-0 text-box-muted transition-colors group-hover:text-primary" />
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
               </div>
-              <h3 className="mt-5 text-base font-semibold tracking-tight text-box-foreground">
+              <h3 className="mt-5 text-base font-semibold tracking-tight text-foreground">
                 {template.name}
               </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-box-muted">
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                 {template.description}
               </p>
-              <span className="label-mono-sm mt-5 text-box-muted">
+              <span className="label-mono-sm mt-5 text-muted-foreground">
                 {template.category}
               </span>
             </Link>

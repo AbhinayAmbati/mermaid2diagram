@@ -49,7 +49,7 @@ export function SiteFooter() {
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                        className="text-sm text-on-panel transition-colors hover:text-primary"
+                        className="text-sm text-on-panel transition-colors hover:text-signal"
                       >
                         {link.label}
                       </a>
@@ -66,7 +66,7 @@ export function SiteFooter() {
               </p>
               <Link
                 href="/editor"
-                className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-primary transition-opacity hover:opacity-80"
+                className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-signal transition-opacity hover:opacity-80"
               >
                 Open editor
                 <span aria-hidden>→</span>

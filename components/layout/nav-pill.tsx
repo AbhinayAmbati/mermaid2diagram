@@ -19,7 +19,7 @@ export function NavPill({
   return (
     <div
       className={cn(
-        "mx-auto flex w-fit max-w-full items-center gap-0.5 rounded-pill border border-white/[0.07] bg-nav p-2 text-nav-foreground shadow-pill",
+        "mx-auto flex w-fit max-w-full items-center gap-0.5 rounded-pill border border-black/[0.06] bg-nav p-2 text-nav-foreground shadow-pill",
         className
       )}
     >

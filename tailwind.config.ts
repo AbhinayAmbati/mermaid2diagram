@@ -56,23 +56,15 @@ const config: Config = {
         ring: "var(--ring)",
         grid: "var(--grid-dot)",
 
-        /* Always-dark accent surfaces */
+        /* Accent surfaces, which invert with the theme */
         panel: {
-          DEFAULT: "var(--dark)",
-          2: "var(--dark-2)",
+          DEFAULT: "var(--panel)",
+          2: "var(--panel-2)",
         },
-        "on-panel": "var(--on-dark)",
-        "on-panel-muted": "var(--on-dark-muted)",
-        "panel-line": "var(--on-dark-line)",
-
-        /* Boxes that stay light in both themes */
-        box: {
-          DEFAULT: "var(--box)",
-          foreground: "var(--box-foreground)",
-          muted: "var(--box-muted)",
-          line: "var(--box-line)",
-          hover: "var(--box-hover)",
-        },
+        "on-panel": "var(--on-panel)",
+        "on-panel-muted": "var(--on-panel-muted)",
+        "panel-line": "var(--panel-line)",
+        signal: "var(--signal)",
 
         /* Floating navigation pill */
         nav: {

@@ -20,8 +20,8 @@ const EXPORT_ROWS = [
 ];
 
 /**
- * The hero's result panel: a dark, chamfered card holding the real, live
- * Mermaid render - the same engine the editor uses, not a screenshot.
+ * The hero's result panel. It inverts with the theme, so on the dark page it
+ * becomes a light card. The diagram itself always renders on a white canvas.
  */
 export function HeroPreview() {
   const [svg, setSvg] = React.useState<string | null>(null);
@@ -57,7 +57,7 @@ export function HeroPreview() {
         </div>
         <div className="text-right">
           <div className="flex items-center justify-end gap-2">
-            <span className="h-2 w-2 rounded-full bg-primary" />
+            <span className="h-2 w-2 rounded-full bg-signal" />
             <span className="font-mono text-[2.5rem] font-medium leading-none tracking-tight text-on-panel">
               5
             </span>
@@ -70,12 +70,12 @@ export function HeroPreview() {
 
       {/* Divider with lime signal */}
       <div className="relative my-7 h-px w-full bg-panel-line">
-        <span className="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-primary" />
+        <span className="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-signal" />
       </div>
 
       {/* The actual rendered diagram */}
       <div className="relative overflow-hidden rounded-md bg-white">
-        <div className="blueprint-grid absolute inset-0 opacity-[0.06]" aria-hidden />
+        <div className="grid-bg-dots absolute inset-0 opacity-70" aria-hidden />
         <div className="relative flex min-h-[220px] items-center justify-center p-6">
           {svg ? (
             <div
@@ -95,9 +95,10 @@ export function HeroPreview() {
             </div>
           )}
         </div>
-        <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm bg-panel/90 px-2 py-1">
+        {/* Always a dark chip, so it reads on the white diagram canvas */}
+        <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-sm bg-black/80 px-2 py-1">
           <Check className="h-3 w-3 text-primary" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-on-panel">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white">
             Rendered locally
           </span>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTheme } from "next-themes";
 import { Check, Loader2 } from "lucide-react";
 
 import { DEFAULT_SETTINGS, buildMermaidConfig } from "@/lib/mermaid/config";
@@ -24,22 +25,28 @@ const BLUEPRINT_SOURCE = `flowchart LR
     API --> Worker`;
 
 /**
- * A dark technical panel showing a real Mermaid render using Mermaid's dark
- * theme - the diagram itself becomes the blueprint artwork.
+ * A technical panel showing a real Mermaid render. The panel inverts with the
+ * theme, so the diagram's own theme has to invert with it: light strokes on the
+ * dark panel, dark strokes on the light one.
  */
 export function BlueprintPanel() {
+  const { resolvedTheme } = useTheme();
   const [svg, setSvg] = React.useState<string | null>(null);
   const [failed, setFailed] = React.useState(false);
 
+  const panelIsDark = resolvedTheme !== "dark";
+
   React.useEffect(() => {
     let cancelled = false;
+    setSvg(null);
+    setFailed(false);
     renderDiagram({
       source: BLUEPRINT_SOURCE,
       config: buildMermaidConfig({
         ...DEFAULT_SETTINGS,
-        theme: "dark",
         canvasBackground: "transparent",
         fontSize: 13,
+        ...(panelIsDark ? { theme: "dark" as const } : {}),
       }),
       id: nextRenderId(),
     })
@@ -52,7 +59,7 @@ export function BlueprintPanel() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [panelIsDark]);
 
   return (
     <div className="relative h-full min-h-[420px] w-full overflow-hidden bg-panel">
@@ -80,7 +87,7 @@ export function BlueprintPanel() {
               <span>Preview unavailable</span>
             ) : (
               <>
-                <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
                 Rendering
               </>
             )}
@@ -88,7 +95,8 @@ export function BlueprintPanel() {
         )}
       </div>
 
-      <div className="absolute left-1/2 top-8 flex -translate-x-1/2 items-center gap-2 rounded-sm bg-black/30 px-3 py-1.5 backdrop-blur-sm">
+      {/* Always a dark chip, so it reads on either panel surface */}
+      <div className="absolute left-1/2 top-8 flex -translate-x-1/2 items-center gap-2 rounded-sm bg-black/75 px-3 py-1.5 backdrop-blur-sm">
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
           Diagram rendered
         </span>

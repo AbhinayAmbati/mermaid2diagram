@@ -10,7 +10,7 @@ export function FinalCta() {
         <div className="chamfer-lg-tl-br relative overflow-hidden bg-panel px-6 py-16 text-center sm:px-16 sm:py-24">
           <div className="blueprint-grid absolute inset-0" aria-hidden />
           <div className="relative">
-            <span className="label-mono text-primary">Ready when you are</span>
+            <span className="label-mono text-signal">Ready when you are</span>
             <h2 className="mx-auto mt-5 max-w-3xl text-balance text-[2rem] font-medium leading-[1.1] tracking-[-0.03em] text-on-panel sm:text-[3rem]">
               Your next diagram is one paste away.
             </h2>

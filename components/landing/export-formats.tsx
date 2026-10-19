@@ -43,22 +43,22 @@ export function ExportFormats() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-box-line bg-box-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {FORMATS.map((format) => (
             <div
               key={format.label}
-              className="group flex flex-col justify-between bg-box p-7 transition-colors hover:bg-box-hover"
+              className="group flex flex-col justify-between bg-card p-7 transition-colors hover:bg-secondary/60"
             >
               <div className="flex items-start justify-between">
-                <span className="font-mono text-2xl font-medium tracking-tight text-box-foreground">
+                <span className="font-mono text-2xl font-medium tracking-tight text-foreground">
                   {format.label}
                 </span>
-                <ArrowUpRight className="h-4 w-4 text-box-muted transition-colors group-hover:text-primary" />
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
               </div>
-              <p className="mt-6 text-sm leading-relaxed text-box-muted">
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
                 {format.body}
               </p>
-              <span className="label-mono-sm mt-5 text-box-muted">
+              <span className="label-mono-sm mt-5 text-muted-foreground">
                 {format.meta}
               </span>
             </div>

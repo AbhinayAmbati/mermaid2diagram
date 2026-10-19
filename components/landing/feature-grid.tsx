@@ -55,23 +55,23 @@ export function FeatureGrid() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-box-line bg-box-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={feature.title} className="group bg-box p-7">
+              <div key={feature.title} className="group bg-card p-7">
                 <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-box-line bg-box-hover text-box-foreground transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-secondary text-foreground transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-box-muted/70">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-6 text-base font-semibold tracking-tight text-box-foreground">
+                <h3 className="mt-6 text-base font-semibold tracking-tight text-foreground">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-box-muted">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {feature.body}
                 </p>
               </div>

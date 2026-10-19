@@ -20,7 +20,7 @@ const ROW_TWO = [
 
 function TypeChip({ label }: { label: string }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-box-line bg-box px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-box-foreground">
+    <span className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border bg-card px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-foreground">
       <span className="h-1 w-1 rounded-full bg-primary" />
       {label}
     </span>

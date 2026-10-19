@@ -45,12 +45,19 @@
     --ring: #9bd41f;
     --caret: #101613;
 
-    /* Always-dark accent surfaces (panels, hero cards, footers) */
-    --dark: #0c1a15;
-    --dark-2: #14261f;
-    --on-dark: #f2f4f1;
-    --on-dark-muted: #93a09a;
-    --on-dark-line: rgba(255, 255, 255, 0.12);
+    /*
+     * Accent surfaces: the hero result card, the technical panels, the CTA band,
+     * the footer and the navigation pill. These invert with the theme, so a
+     * surface that reads dark on the light page reads light on the dark page.
+     */
+    --panel: #0c1a15;
+    --panel-2: #14261f;
+    --on-panel: #f2f4f1;
+    --on-panel-muted: #93a09a;
+    --panel-line: rgba(255, 255, 255, 0.12);
+    --panel-grid: rgba(255, 255, 255, 0.055);
+    /* Accent for text sitting on an accent surface */
+    --signal: #c8f73c;
 
     /* Floating navigation pill */
     --nav: #2b2e2e;
@@ -60,17 +67,6 @@
     --nav-hover: rgba(255, 255, 255, 0.08);
 
     --grid-dot: #d9ddd3;
-
-    /*
-     * "Boxes" that stay light in both themes. The landing page's cards and
-     * chips keep a white surface even in dark mode, so they read as distinct
-     * objects on the dark canvas instead of dissolving into it.
-     */
-    --box: #ffffff;
-    --box-foreground: #101613;
-    --box-muted: #6e7a74;
-    --box-line: #dfe2db;
-    --box-hover: #f5f6f3;
 
     /* Editor */
     --editor-bg: #ffffff;
@@ -120,17 +116,20 @@
     --ring: #c8f73c;
     --caret: #c8f73c;
 
-    --dark: #0b1a15;
-    --dark-2: #14261f;
-    --on-dark: #f2f4f1;
-    --on-dark-muted: #93a09a;
-    --on-dark-line: rgba(255, 255, 255, 0.12);
+    /* Accent surfaces invert: light surfaces on the dark page */
+    --panel: #f2f4f1;
+    --panel-2: #ffffff;
+    --on-panel: #101613;
+    --on-panel-muted: #5c6862;
+    --panel-line: rgba(16, 22, 19, 0.14);
+    --panel-grid: rgba(16, 22, 19, 0.05);
+    --signal: #4f7310;
 
-    --nav: #17231e;
-    --nav-foreground: #f4f5f3;
-    --nav-muted: #9aa5a0;
-    --nav-line: rgba(255, 255, 255, 0.12);
-    --nav-hover: rgba(255, 255, 255, 0.07);
+    --nav: #eef0ec;
+    --nav-foreground: #101613;
+    --nav-muted: #5c6862;
+    --nav-line: rgba(16, 22, 19, 0.14);
+    --nav-hover: rgba(16, 22, 19, 0.07);
 
     --grid-dot: #24382e;
 
@@ -312,12 +311,8 @@
 
   /* Blueprint grid for the dark technical panels */
   .blueprint-grid {
-    background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0.055) 1px,
-        transparent 1px
-      ),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--panel-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--panel-grid) 1px, transparent 1px);
     background-size: 32px 32px;
   }
 
