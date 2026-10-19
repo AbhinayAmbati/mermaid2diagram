@@ -29,10 +29,11 @@ test.describe("Mermaid Studio editor", () => {
     const editor = page.locator(".cm-content").first();
     await editor.click();
     await page.keyboard.press("ControlOrMeta+A");
-    await page.keyboard.type("flowchart TD\n  A[Unclosed --> B");
+    // Unambiguously invalid: Mermaid cannot detect a diagram type at all.
+    await page.keyboard.type("this is definitely not valid mermaid");
 
     await expect(
-      page.getByText(/syntax error/i).first()
+      page.getByRole("heading", { name: /syntax error/i })
     ).toBeVisible();
   });
 
