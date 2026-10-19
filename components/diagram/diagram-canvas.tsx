@@ -207,6 +207,7 @@ export function DiagramCanvas({
             >
               <div
                 className="mermaid-canvas-pan p-10"
+                data-testid="diagram-canvas"
                 // Mermaid renders with securityLevel "strict", which sanitises
                 // every user-supplied label before it reaches this markup.
                 dangerouslySetInnerHTML={{ __html: svg }}
