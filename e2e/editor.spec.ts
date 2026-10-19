@@ -3,13 +3,13 @@ import { expect, test } from "@playwright/test";
 test.describe("mermaid2diagram editor", () => {
   test("renders the default diagram on load", async ({ page }) => {
     await page.goto("/editor");
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toBeVisible();
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toBeVisible();
     await expect(page.getByText("Mermaid Code")).toBeVisible();
   });
 
   test("updates the preview when the source changes", async ({ page }) => {
     await page.goto("/editor");
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toBeVisible();
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toBeVisible();
 
     const editor = page.locator(".cm-content").first();
     await editor.click();
@@ -17,14 +17,14 @@ test.describe("mermaid2diagram editor", () => {
     await page.keyboard.press("ControlOrMeta+A");
     await page.keyboard.type("flowchart LR\n  X[Alpha] --> Y[Omega]");
 
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toContainText(
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toContainText(
       "Alpha"
     );
   });
 
   test("shows a helpful error for invalid syntax", async ({ page }) => {
     await page.goto("/editor");
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toBeVisible();
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toBeVisible();
 
     const editor = page.locator(".cm-content").first();
     await editor.click();
@@ -39,7 +39,7 @@ test.describe("mermaid2diagram editor", () => {
 
   test("downloads a genuine SVG file", async ({ page }) => {
     await page.goto("/editor");
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toBeVisible();
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toBeVisible();
 
     await page.getByRole("button", { name: "Export" }).first().click();
     await expect(
@@ -57,6 +57,6 @@ test.describe("mermaid2diagram editor", () => {
     await page.goto("/");
     await page.getByRole("link", { name: /Basic Flowchart/ }).click();
     await expect(page).toHaveURL(/example=basic-flowchart/);
-    await expect(page.locator("[data-testid="diagram-canvas"] svg").first()).toBeVisible();
+    await expect(page.locator('[data-testid="diagram-canvas"] svg').first()).toBeVisible();
   });
 });
