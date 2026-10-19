@@ -127,6 +127,27 @@ export async function svgToPngBlob(
 }
 
 /**
+ * Rasterise an SVG to a WebP blob. WebP keeps an alpha channel, so a
+ * transparent request stays transparent.
+ *
+ * Some browsers silently fall back to PNG when WebP encoding is unavailable,
+ * which would hand back a mislabelled file. We refuse instead of pretending.
+ */
+export async function svgToWebpBlob(
+  svg: string,
+  options: RasterOptions
+): Promise<Blob> {
+  const canvas = await renderSvgToCanvas(svg, options);
+  const blob = await canvasToBlob(canvas, "image/webp", 0.92);
+  if (blob.type !== "image/webp") {
+    throw new Error(
+      "This browser cannot encode WebP images. Try PNG or JPEG instead."
+    );
+  }
+  return blob;
+}
+
+/**
  * Rasterise an SVG to a JPEG blob. JPEG has no alpha channel, so a transparent
  * request is coerced to a solid white background.
  */

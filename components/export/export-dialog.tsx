@@ -22,7 +22,11 @@ import { useDiagramStore } from "@/lib/store/use-diagram-store";
 import { copyToClipboard, formatBytes, toSafeFileName } from "@/lib/utils";
 import type { ExportFormat, ExportOptions } from "@/types/export";
 
-import { ExportFormatPicker, ExportOptionFields } from "./export-options";
+import {
+  ExportFormatPicker,
+  ExportOptionFields,
+  ExportPreview,
+} from "./export-options";
 
 export interface ExportDialogProps {
   open: boolean;
@@ -152,6 +156,10 @@ export function ExportDialog({ open, onOpenChange }: ExportDialogProps) {
               onChange={(format: ExportFormat) => patch({ format })}
             />
           </div>
+
+          {options.format !== "mmd" && (
+            <ExportPreview svg={svg} background={options.background} />
+          )}
 
           <ExportOptionFields
             options={options}

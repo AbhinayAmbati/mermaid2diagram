@@ -1,5 +1,5 @@
 /** Every export format the app genuinely supports. */
-export type ExportFormat = "svg" | "png" | "jpeg" | "pdf" | "mmd";
+export type ExportFormat = "svg" | "png" | "webp" | "jpeg" | "pdf" | "mmd";
 
 /** Background handling for raster / PDF exports. */
 export type ExportBackground = "white" | "transparent" | "dark";

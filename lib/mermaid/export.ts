@@ -7,7 +7,7 @@ import type {
 } from "@/types/export";
 
 import { svgToPdfBlob } from "./export-pdf";
-import { svgToJpegBlob, svgToPngBlob } from "./export-raster";
+import { svgToJpegBlob, svgToPngBlob, svgToWebpBlob } from "./export-raster";
 import { buildSvgDocument } from "./export-svg";
 
 /** Metadata that drives the export dialog. Only genuinely supported formats. */
@@ -26,6 +26,15 @@ export const EXPORT_FORMATS: ExportFormatMeta[] = [
     label: "PNG",
     extension: "png",
     description: "Lossless raster with optional transparency.",
+    supportsScale: true,
+    supportsBackground: true,
+    supportsOrientation: false,
+  },
+  {
+    id: "webp",
+    label: "WebP",
+    extension: "webp",
+    description: "Compact raster that keeps transparency.",
     supportsScale: true,
     supportsBackground: true,
     supportsOrientation: false,
@@ -105,6 +114,14 @@ export async function runExport({
       }
       case "png": {
         const blob = await svgToPngBlob(svg, {
+          scale: options.scale,
+          background: options.background,
+        });
+        downloadBlob(blob, filename);
+        return { ok: true, filename, bytes: blob.size };
+      }
+      case "webp": {
+        const blob = await svgToWebpBlob(svg, {
           scale: options.scale,
           background: options.background,
         });

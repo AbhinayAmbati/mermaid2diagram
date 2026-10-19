@@ -7,6 +7,7 @@ describe("export format metadata", () => {
     expect(EXPORT_FORMATS.map((f) => f.id)).toEqual([
       "svg",
       "png",
+      "webp",
       "jpeg",
       "pdf",
       "mmd",
@@ -15,9 +16,15 @@ describe("export format metadata", () => {
 
   it("only marks scale as supported for raster formats", () => {
     expect(getExportFormat("png").supportsScale).toBe(true);
+    expect(getExportFormat("webp").supportsScale).toBe(true);
     expect(getExportFormat("jpeg").supportsScale).toBe(true);
     expect(getExportFormat("svg").supportsScale).toBe(false);
     expect(getExportFormat("pdf").supportsScale).toBe(false);
+  });
+
+  it("uses the webp extension for WebP files", () => {
+    expect(getExportFormat("webp").extension).toBe("webp");
+    expect(getExportFormat("webp").supportsBackground).toBe(true);
   });
 
   it("only marks orientation as supported for PDF", () => {

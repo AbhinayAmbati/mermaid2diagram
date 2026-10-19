@@ -1,6 +1,16 @@
 "use client";
 
-import { Check, FileCode2, FileImage, FileText, FileType2, ImageDown } from "lucide-react";
+import * as React from "react";
+
+import {
+  Check,
+  FileCode2,
+  FileImage,
+  FileText,
+  FileType2,
+  Image as ImageIcon,
+  ImageDown,
+} from "lucide-react";
 
 import { Label } from "@/components/ui/label";
 import {
@@ -11,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EXPORT_FORMATS } from "@/lib/mermaid/export";
+import { makeStandaloneSvg } from "@/lib/mermaid/sanitize";
 import { cn } from "@/lib/utils";
 import type {
   ExportBackground,
@@ -22,6 +33,7 @@ import type {
 const FORMAT_ICONS: Record<ExportFormat, React.ComponentType<{ className?: string }>> = {
   svg: FileCode2,
   png: ImageDown,
+  webp: ImageIcon,
   jpeg: FileImage,
   pdf: FileText,
   mmd: FileType2,
@@ -191,6 +203,66 @@ export function ExportOptionFields({
           </Select>
         </div>
       )}
+    </div>
+  );
+}
+
+const PREVIEW_BACKGROUND: Record<ExportBackground, string | undefined> = {
+  white: "#ffffff",
+  dark: "#0c1a15",
+  transparent: undefined,
+};
+
+const CHECKERBOARD =
+  "conic-gradient(#e2e5de 25%, transparent 0 50%, #e2e5de 0 75%, transparent 0)";
+
+/**
+ * A live preview of the exported diagram, showing the currently selected
+ * background so the choice is visible before downloading.
+ *
+ * The SVG is rendered through an `<img>`, which makes it an isolated document:
+ * no element ids are duplicated from the live canvas, and the result matches
+ * how the raster exporters will draw it.
+ */
+export function ExportPreview({
+  svg,
+  background,
+}: {
+  svg: string | null;
+  background: ExportBackground;
+}) {
+  const src = React.useMemo(
+    () =>
+      svg
+        ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(makeStandaloneSvg(svg))}`
+        : null,
+    [svg]
+  );
+
+  if (!src) return null;
+
+  return (
+    <div className="space-y-2">
+      <Label className="label-mono text-muted-foreground">Preview</Label>
+      <div
+        className="relative h-[200px] w-full overflow-hidden rounded-md border border-border"
+        style={{ background: PREVIEW_BACKGROUND[background] }}
+      >
+        {background === "transparent" && (
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: CHECKERBOARD, backgroundSize: "16px 16px" }}
+            aria-hidden
+          />
+        )}
+        <div className="relative flex h-full w-full items-center justify-center p-5">
+          <img
+            src={src}
+            alt="Preview of the exported diagram"
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+      </div>
     </div>
   );
 }
