@@ -372,18 +372,23 @@
   }
 }
 
+/*
+ * The track holds four copies of the list, so travelling one quarter of its
+ * width advances exactly one copy and the loop is seamless. The distance
+ * travelled is unchanged, which keeps the perceived speed the same.
+ */
 @keyframes marquee-left {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
 @keyframes marquee-right {
   from {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
   to {
     transform: translateX(0);

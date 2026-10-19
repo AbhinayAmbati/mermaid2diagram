@@ -18,6 +18,18 @@ const ROW_TWO = [
   "Block Diagram",
 ];
 
+/**
+ * Number of copies of the list rendered into one track.
+ *
+ * For a seamless loop the track must still cover the viewport after it has
+ * travelled one copy's width, which needs `(COPIES - 1) * copyWidth >= viewport`.
+ * One copy of seven chips is slightly narrower than the container, so two
+ * copies leave a visible gap at the end of each cycle. Four gives plenty of
+ * headroom across font sizes and zoom levels, and the track travels a quarter
+ * of its own width so the perceived speed is unchanged.
+ */
+const COPIES = 4;
+
 function TypeChip({ label }: { label: string }) {
   return (
     <span className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border bg-card px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-foreground">
@@ -28,9 +40,9 @@ function TypeChip({ label }: { label: string }) {
 }
 
 /**
- * One marquee lane. The track holds two identical copies of the list so that
- * translating by half its width loops seamlessly. The second copy is hidden
- * when the user prefers reduced motion.
+ * One marquee lane. The track holds several identical copies of the list, so
+ * translating it by exactly one copy's width loops without a seam. Every copy
+ * after the first is hidden when the user prefers reduced motion.
  */
 function MarqueeLane({
   items,
@@ -46,12 +58,12 @@ function MarqueeLane({
           direction === "left" ? "marquee-track marquee-left" : "marquee-track marquee-right"
         }
       >
-        {[0, 1].map((copy) => (
+        {Array.from({ length: COPIES }, (_, copy) => (
           <div
             key={copy}
-            aria-hidden={copy === 1}
+            aria-hidden={copy > 0}
             className={
-              copy === 1
+              copy > 0
                 ? "marquee-duplicate flex shrink-0 items-center gap-3 pr-3"
                 : "flex shrink-0 items-center gap-3 pr-3"
             }
