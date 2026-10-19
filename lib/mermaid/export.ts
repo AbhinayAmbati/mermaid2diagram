@@ -16,7 +16,7 @@ export const EXPORT_FORMATS: ExportFormatMeta[] = [
     id: "svg",
     label: "SVG",
     extension: "svg",
-    description: "Vector — infinitely scalable, best for print.",
+    description: "Vector, infinitely scalable, best for print.",
     supportsScale: false,
     supportsBackground: true,
     supportsOrientation: false,
@@ -73,7 +73,7 @@ export interface RunExportParams {
 
 /**
  * Produce and download a real file in the requested format. Every branch
- * yields a genuine file of the correct type — nothing is renamed or faked.
+ * yields a genuine file of the correct type - nothing is renamed or faked.
  */
 export async function runExport({
   svg,

@@ -47,7 +47,7 @@ export const PRESETS: AppearancePreset[] = [
   {
     id: "monochrome",
     name: "Monochrome",
-    description: "Pure black on white — print friendly.",
+    description: "Pure black on white, print friendly.",
     theme: "base",
     themeVariables: {
       primaryColor: "#ffffff",
@@ -113,7 +113,7 @@ export const DEFAULT_SETTINGS: DiagramSettings = {
  * Security: we keep `securityLevel: "strict"` (Mermaid sanitises labels) and
  * enable `suppressErrorRendering` so a bad diagram never injects an error
  * graphic into the host document. `htmlLabels` is disabled so labels are real
- * SVG `<text>` nodes rather than `<foreignObject>` — the latter does not
+ * SVG `<text>` nodes rather than `<foreignObject>` - the latter does not
  * rasterise reliably when an SVG is drawn onto a canvas for PNG/PDF export.
  */
 export function buildMermaidConfig(settings: DiagramSettings): MermaidConfig {

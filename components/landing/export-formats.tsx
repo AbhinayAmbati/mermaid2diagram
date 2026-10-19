@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 const FORMATS = [
   {
     label: "SVG",
-    body: "Vector output with embedded styles — infinitely scalable and print-ready.",
+    body: "Vector output with embedded styles, infinitely scalable and print-ready.",
     meta: "vector",
   },
   {
@@ -38,7 +38,7 @@ export function ExportFormats() {
             Export in the format you need
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Every format produces a genuine file of that type — nothing is
+            Every format produces a genuine file of that type. Nothing is
             renamed or faked, and nothing leaves your device.
           </p>
         </div>

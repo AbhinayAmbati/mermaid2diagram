@@ -11,7 +11,7 @@ const FEATURES = [
   {
     icon: Code2,
     title: "A real code editor",
-    body: "CodeMirror 6 with Mermaid syntax highlighting, line numbers, undo/redo and keyboard shortcuts — not a styled textarea.",
+    body: "CodeMirror 6 with Mermaid syntax highlighting, line numbers, undo/redo and keyboard shortcuts, not a styled textarea.",
   },
   {
     icon: Gauge,
@@ -26,7 +26,7 @@ const FEATURES = [
   {
     icon: Download,
     title: "Genuine exports",
-    body: "Real SVG, PNG (1–3×), PDF, JPEG and .mmd files — generated locally, never uploaded.",
+    body: "Real SVG, PNG (1x, 2x, 3x), PDF, JPEG and .mmd files, generated locally and never uploaded.",
   },
   {
     icon: Palette,

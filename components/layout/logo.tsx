@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The Mermaid Studio mark: a lime tile holding a node-and-connector glyph —
+ * The Mermaid Studio mark: a lime tile holding a node-and-connector glyph -
  * the same shape language the product draws.
  */
 export function Logo({

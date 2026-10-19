@@ -112,14 +112,14 @@ export function ExportDialog({ open, onOpenChange }: ExportDialogProps) {
           <span className="label-mono text-muted-foreground">Export</span>
           <DialogTitle>Download your diagram</DialogTitle>
           <DialogDescription>
-            Everything is generated in your browser — your diagram never leaves
+            Everything is generated in your browser. Your diagram never leaves
             this device.
           </DialogDescription>
         </DialogHeader>
 
         {!hasDiagram && !isSourceExport && (
           <div className="rounded-md border border-border bg-secondary/60 px-3.5 py-2.5 text-xs leading-relaxed text-muted-foreground">
-            Render a valid diagram first — there is nothing to export yet. You
+            Render a valid diagram first. There is nothing to export yet. You
             can still download the Mermaid source.
           </div>
         )}

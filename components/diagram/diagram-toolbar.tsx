@@ -122,7 +122,7 @@ export function DiagramToolbar({
             variant="ghost"
             size="icon-sm"
             onClick={onCycleBackground}
-            aria-label={`${BACKGROUND_LABEL[background]} — click to change`}
+            aria-label={`${BACKGROUND_LABEL[background]} , click to change`}
           >
             <Grid3x3 className="h-4 w-4" />
           </Button>

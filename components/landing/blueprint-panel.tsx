@@ -25,7 +25,7 @@ const BLUEPRINT_SOURCE = `flowchart LR
 
 /**
  * A dark technical panel showing a real Mermaid render using Mermaid's dark
- * theme — the diagram itself becomes the blueprint artwork.
+ * theme - the diagram itself becomes the blueprint artwork.
  */
 export function BlueprintPanel() {
   const [svg, setSvg] = React.useState<string | null>(null);

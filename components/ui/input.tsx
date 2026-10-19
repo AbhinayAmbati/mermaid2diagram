@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Underline input: no box, no fill — just a hairline rule that darkens on
+ * Underline input: no box, no fill - just a hairline rule that darkens on
  * focus, matching the reference's form fields.
  */
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(

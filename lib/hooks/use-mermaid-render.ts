@@ -12,11 +12,11 @@ import { useDebouncedValue } from "./use-debounced-value";
  * Owns the render lifecycle for the canvas.
  *
  * Two hazards are handled explicitly:
- *  1. Race conditions — Mermaid renders asynchronously, so we serialise every
+ *  1. Race conditions - Mermaid renders asynchronously, so we serialise every
  *     pass through a promise queue and tag each with a monotonic token. A pass
  *     whose token is stale by the time it resolves is discarded, so an old
  *     render can never overwrite a newer preview.
- *  2. Repeated renders — each pass gets a fresh element id and Mermaid's
+ *  2. Repeated renders - each pass gets a fresh element id and Mermaid's
  *     temporary DOM nodes are cleaned up (see render.ts), preventing duplicate
  *     SVG identifiers from accumulating.
  */
@@ -43,7 +43,7 @@ export function useMermaidRender(debounceMs = 350) {
           return;
         }
 
-        // A newer pass was queued while we waited — let it win.
+        // A newer pass was queued while we waited - let it win.
         if (token !== tokenRef.current) return;
 
         store.beginRender();
@@ -54,7 +54,7 @@ export function useMermaidRender(debounceMs = 350) {
             config: buildMermaidConfig(debouncedSettings),
             id: nextRenderId(),
           });
-          if (token !== tokenRef.current) return; // stale — discard
+          if (token !== tokenRef.current) return; // stale - discard
           useDiagramStore
             .getState()
             .resolveRender(

@@ -1,4 +1,4 @@
-# ADR 0002 — CodeMirror 6 rather than Monaco
+# ADR 0002: CodeMirror 6 rather than Monaco
 
 - **Status:** Accepted
 - **Date:** 2025-01

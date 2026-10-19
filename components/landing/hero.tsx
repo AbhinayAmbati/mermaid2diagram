@@ -8,7 +8,7 @@ import { HeroPreview } from "./hero-preview";
 const SPEC_ROWS = [
   {
     label: "Engine",
-    value: "Mermaid v11 — flowcharts, sequence, class, ER, Gantt, mindmaps",
+    value: "Mermaid v11: flowcharts, sequence, class, ER, Gantt, mindmaps",
   },
   {
     label: "Editor",

@@ -1,7 +1,7 @@
 # Architecture
 
 Mermaid Studio is a client-side application. There is no backend, database or
-authentication — the whole product is a static Next.js app whose only runtime
+authentication. The whole product is a static Next.js app whose only runtime
 dependency is the browser.
 
 ## Layers
@@ -13,7 +13,7 @@ dependency is the browser.
 └───────────────┬──────────────────────────────────────────────┘
                 │ reads/writes
 ┌───────────────▼──────────────────────────────────────────────┐
-│ State — Zustand store (lib/store)                            │
+│ State - Zustand store (lib/store)                            │
 │   source · settings · svg · status · error                   │
 └───────────────┬──────────────────────────────────────────────┘
                 │ effects
@@ -73,8 +73,8 @@ ExportDialog
 
 ## Where to extend
 
-- **New export format** — add an entry to `EXPORT_FORMATS` and a branch in
+- **New export format** - add an entry to `EXPORT_FORMATS` and a branch in
   `runExport`. The dialog picks up metadata automatically.
-- **New example** — append to `TEMPLATES`; it appears in the dropdown, the
+- **New example** - append to `TEMPLATES`; it appears in the dropdown, the
   landing gallery and the deep-link handler at once.
-- **New diagram-type label** — extend `TYPE_LABELS` in `lib/mermaid/diagram-type.ts`.
+- **New diagram-type label** - extend `TYPE_LABELS` in `lib/mermaid/diagram-type.ts`.

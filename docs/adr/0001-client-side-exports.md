@@ -1,4 +1,4 @@
-# ADR 0001 — Client-side exports instead of a server render service
+# ADR 0001: Client-side exports instead of a server render service
 
 - **Status:** Accepted
 - **Date:** 2025-01

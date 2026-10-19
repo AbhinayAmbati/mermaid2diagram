@@ -88,7 +88,7 @@ export async function renderDiagram({
   id,
 }: RenderDiagramParams): Promise<RenderResult> {
   if (!source.trim()) {
-    throw new Error("Nothing to render yet — add some Mermaid code to begin.");
+    throw new Error("Nothing to render yet. Add some Mermaid code to begin.");
   }
 
   const mermaid = await loadMermaid();

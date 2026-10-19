@@ -21,7 +21,7 @@ const EXPORT_ROWS = [
 
 /**
  * The hero's result panel: a dark, chamfered card holding the real, live
- * Mermaid render — the same engine the editor uses, not a screenshot.
+ * Mermaid render - the same engine the editor uses, not a screenshot.
  */
 export function HeroPreview() {
   const [svg, setSvg] = React.useState<string | null>(null);

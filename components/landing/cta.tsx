@@ -16,7 +16,7 @@ export function FinalCta() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-[0.9375rem] leading-relaxed text-on-panel-muted">
               Open the editor, drop in your Mermaid code and export a crisp file
-              in seconds — no sign-up, no server round-trips.
+              in seconds, with no sign-up and no server round-trips.
             </p>
             <div className="mt-9 flex justify-center">
               <Button size="lg" asChild className="gap-2">

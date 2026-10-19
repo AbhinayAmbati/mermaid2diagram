@@ -10,7 +10,7 @@ export interface StoredDraft {
 }
 
 /**
- * Read the locally-saved draft. Never throws — corrupt or unavailable storage
+ * Read the locally-saved draft. Never throws - corrupt or unavailable storage
  * simply yields `null`. Diagram content is only ever kept on this device.
  */
 export function readDraft(): StoredDraft | null {
@@ -31,7 +31,7 @@ export function writeDraft(draft: StoredDraft): void {
   try {
     window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
   } catch {
-    /* storage full or blocked — autosave is best-effort */
+    /* storage full or blocked - autosave is best-effort */
   }
 }
 

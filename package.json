@@ -2,7 +2,7 @@
   "name": "mermaid-studio",
   "version": "0.1.0",
   "private": true,
-  "description": "Mermaid Studio — turn Mermaid.js code into beautiful, exportable diagrams.",
+  "description": "Mermaid Studio: turn Mermaid.js code into beautiful, exportable diagrams.",
   "scripts": {
     "dev": "next dev",
     "build": "next build --turbopack",

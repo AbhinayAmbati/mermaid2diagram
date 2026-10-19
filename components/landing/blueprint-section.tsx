@@ -23,7 +23,7 @@ export function BlueprintSection() {
             <span className="text-muted-foreground/45">
               {" "}
               Flowcharts, sequence, class, state, ER, Gantt, Git graphs,
-              mindmaps, timelines and more — rendered live, with no build step
+              mindmaps, timelines and more, rendered live, with no build step
               and nothing sent to a server.
             </span>
           </p>

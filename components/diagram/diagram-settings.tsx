@@ -325,7 +325,7 @@ export function DiagramSettingsPanel({
             <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             <p>
               Mermaid themes and theme variables apply differently per diagram
-              type — some types (e.g. Gantt, Pie) honour a smaller subset of
+              type. Some types (e.g. Gantt, Pie) honour a smaller subset of
               these values.
             </p>
           </div>

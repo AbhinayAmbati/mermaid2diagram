@@ -1,7 +1,7 @@
 # Mermaid Studio
 
 **From Mermaid code to beautiful diagrams.** Paste or write Mermaid syntax, preview
-it instantly, refine the details, and export crisp SVG, PNG, PDF or JPEG files —
+it instantly, refine the details, and export crisp SVG, PNG, PDF or JPEG files,
 all in the browser, with no account and no server round-trips.
 
 ![status](https://img.shields.io/badge/status-beta-2563ff)
@@ -10,22 +10,22 @@ all in the browser, with no account and no server round-trips.
 
 ## Highlights
 
-- **A real code editor** — CodeMirror 6 with Mermaid syntax highlighting, line
+- **A real code editor**: CodeMirror 6 with Mermaid syntax highlighting, line
   numbers, folding, undo/redo and keyboard shortcuts.
-- **Instant, race-safe preview** — rendering is debounced and serialised through a
+- **Instant, race-safe preview**: rendering is debounced and serialised through a
   promise queue with a monotonic token, so a stale render can never overwrite a
   newer one. Repeated renders are cleaned up to avoid duplicate SVG ids.
-- **Interactive canvas** — zoom, pan, fit-to-screen, reset and fullscreen, with
+- **Interactive canvas**: zoom, pan, fit-to-screen, reset and fullscreen, with
   white / transparent (checkerboard) / grid backgrounds and a live zoom readout.
-- **Genuine exports** — SVG (standalone, sanitised), PNG (1×/2×/3×), PDF (A4,
+- **Genuine exports**: SVG (standalone, sanitised), PNG (1×/2×/3×), PDF (A4,
   portrait or landscape), JPEG and the original `.mmd` source.
-- **Customisation** — four appearance presets (Classic, Monochrome, Electric Blue,
+- **Customisation**: four appearance presets (Classic, Monochrome, Terminal Lime,
   Soft Minimal), Mermaid themes, theme variables, font, size and padding.
 - **Twelve example templates** across flowcharts, sequence, class, ER, state,
   Gantt, Git, mindmap, journey, pie and system architecture.
-- **Local autosave** — your draft is kept in `localStorage` and restored on
+- **Local autosave**: your draft is kept in `localStorage` and restored on
   reload. You can clear it at any time; nothing is ever uploaded.
-- **Accessible & responsive** — semantic markup, labelled controls, tooltips on
+- **Accessible & responsive**: semantic markup, labelled controls, tooltips on
   icon-only buttons, and a split-pane desktop layout that becomes tabs on mobile.
 
 ---
@@ -114,7 +114,7 @@ e2e/                    Playwright specs
 2. `useMermaidRender` debounces the source (350 ms) and the settings (150 ms).
 3. Each pass is appended to a **promise queue** so only one Mermaid render runs at
    a time, and tagged with a **monotonic token**.
-4. When a render resolves, its token is compared with the latest — stale results
+4. When a render resolves, its token is compared with the latest; stale results
    are discarded, which eliminates the classic "old render overwrites new
    preview" race.
 5. On success the SVG string, intrinsic size and detected diagram type are stored.
@@ -125,14 +125,14 @@ e2e/                    Playwright specs
 
 All conversion is client-side:
 
-- **SVG** — sanitised with DOMPurify (SVG profile, preserving Mermaid's inline
+- **SVG**: sanitised with DOMPurify (SVG profile, preserving Mermaid's inline
   `<style>`), given explicit dimensions and an optional background rect.
-- **PNG / JPEG** — the SVG is drawn onto a `<canvas>` at 1–3× (clamped to an
+- **PNG / JPEG**: the SVG is drawn onto a `<canvas>` at 1-3× (clamped to an
   8192 px ceiling) and encoded with `canvas.toBlob`.
-- **PDF** — the diagram is rasterised at 3× and fitted to an A4 page (portrait or
+- **PDF**: the diagram is rasterised at 3× and fitted to an A4 page (portrait or
   landscape) with a configurable background. Mermaid depends heavily on CSS
   classes inside a `<style>` block, so a raster path is used for faithful output.
-- **`.mmd`** — the original source, unchanged.
+- **`.mmd`**: the original source, unchanged.
 
 > **Note on `htmlLabels`:** the render config disables Mermaid's HTML labels so
 > labels are real SVG `<text>` nodes. `<foreignObject>` content does not rasterise
@@ -142,8 +142,8 @@ All conversion is client-side:
 
 ## Security
 
-- Mermaid runs with `securityLevel: "strict"` — user labels are sanitised by
-  Mermaid itself — and `suppressErrorRendering` is enabled so a bad diagram never
+- Mermaid runs with `securityLevel: "strict"` - user labels are sanitised by
+  Mermaid itself - and `suppressErrorRendering` is enabled so a bad diagram never
   injects error graphics into the document.
 - Exported SVG passes through DOMPurify before it is written to disk or clipboard.
 - Diagram source is treated as untrusted input throughout.
