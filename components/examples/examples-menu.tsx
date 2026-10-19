@@ -21,6 +21,8 @@ export interface ExamplesMenuProps {
   /** Compact icon-only trigger for tight toolbars. */
   compact?: boolean;
   align?: "start" | "end";
+  /** Renders the trigger for the dark navigation pill. */
+  onNav?: boolean;
 }
 
 /** Grouped dropdown of every built-in Mermaid template. */
@@ -29,6 +31,7 @@ export function ExamplesMenu({
   className,
   compact = false,
   align = "end",
+  onNav = false,
 }: ExamplesMenuProps) {
   const grouped = React.useMemo(() => {
     const map = new Map<string, MermaidTemplate[]>();
@@ -46,21 +49,25 @@ export function ExamplesMenu({
         <Button
           variant="ghost"
           size={compact ? "icon-sm" : "sm"}
-          className={cn("gap-1.5", className)}
+          className={cn(
+            "gap-1.5 rounded-pill",
+            onNav && "text-nav-muted hover:bg-nav-hover hover:text-nav-foreground",
+            className
+          )}
           aria-label="Examples"
         >
-          <LayoutTemplate className="h-4 w-4" />
+          <LayoutTemplate className="h-3.5 w-3.5" />
           {!compact && (
             <>
               <span className="hidden sm:inline">Examples</span>
-              <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+              <ChevronDown className="h-3 w-3 opacity-60" />
             </>
           )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align={align}
-        className="max-h-[70vh] w-80 overflow-y-auto"
+        className="max-h-[70vh] w-[22rem] overflow-y-auto"
       >
         {grouped.map(([category, items], index) => (
           <React.Fragment key={category}>

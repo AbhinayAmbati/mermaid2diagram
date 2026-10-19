@@ -4,10 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { BookOpen, Download, FilePlus2 } from "lucide-react";
 
-import { Logo } from "@/components/layout/logo";
+import { BrandLockup } from "@/components/layout/logo";
+import { NavDivider, NavPill } from "@/components/layout/nav-pill";
 import { ExamplesMenu } from "@/components/examples/examples-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { TooltipButton } from "@/components/ui/tooltip";
@@ -49,61 +49,56 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-14 max-w-[1800px] items-center gap-2 px-3 sm:px-4">
+    <header className="sticky top-0 z-40 px-3 py-3 sm:px-4 sm:py-4">
+      <NavPill>
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md px-1 py-1 text-foreground transition-opacity hover:opacity-80"
+          className="flex items-center rounded-pill py-1 pl-1.5 pr-2.5 transition-opacity hover:opacity-85"
         >
-          <span className="text-primary">
-            <Logo />
-          </span>
-          <span className="text-sm font-semibold tracking-tight">
-            Mermaid Studio
-          </span>
-          <Badge variant="soft" className="hidden sm:inline-flex">
-            BETA
-          </Badge>
+          <BrandLockup />
         </Link>
 
-        <div className="ml-auto flex items-center gap-1">
+        <NavDivider />
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleNew}
+          className="gap-1.5 rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground"
+        >
+          <FilePlus2 className="h-3.5 w-3.5" />
+          <span className="hidden md:inline">New</span>
+        </Button>
+
+        <ExamplesMenu onSelect={handleExample} />
+
+        <TooltipButton label="Mermaid documentation">
           <Button
             variant="ghost"
-            size="sm"
-            onClick={handleNew}
-            className="gap-1.5"
+            size="icon-sm"
+            asChild
+            aria-label="Open Mermaid documentation"
+            className="rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground"
           >
-            <FilePlus2 className="h-4 w-4" />
-            <span className="hidden md:inline">New</span>
-          </Button>
-
-          <ExamplesMenu onSelect={handleExample} />
-
-          <TooltipButton label="Mermaid documentation">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              asChild
-              aria-label="Open Mermaid documentation"
+            <a
+              href="https://mermaid.js.org/intro/"
+              target="_blank"
+              rel="noreferrer noopener"
             >
-              <a
-                href="https://mermaid.js.org/intro/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <BookOpen className="h-4 w-4" />
-              </a>
-            </Button>
-          </TooltipButton>
-
-          <ThemeToggle />
-
-          <Button size="sm" onClick={onOpenExport} className="ml-1 gap-1.5">
-            <Download className="h-4 w-4" />
-            <span>Export</span>
+              <BookOpen className="h-4 w-4" />
+            </a>
           </Button>
-        </div>
-      </div>
+        </TooltipButton>
+
+        <ThemeToggle />
+
+        <NavDivider />
+
+        <Button size="sm" onClick={onOpenExport} className="gap-1.5 rounded-pill">
+          <Download className="h-3.5 w-3.5" />
+          <span>Export</span>
+        </Button>
+      </NavPill>
 
       <ConfirmDialog
         open={confirmNew}

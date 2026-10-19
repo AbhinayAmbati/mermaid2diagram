@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TooltipButton } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 const OPTIONS = [
   { value: "light", label: "Light", icon: Sun },
@@ -19,7 +20,7 @@ const OPTIONS = [
   { value: "system", label: "System", icon: Monitor },
 ] as const;
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -36,24 +37,28 @@ export function ThemeToggle() {
             variant="ghost"
             size="icon-sm"
             aria-label="Change theme"
+            className={cn(
+              "rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground",
+              className
+            )}
           >
             <ActiveIcon className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
       </TooltipButton>
-      <DropdownMenuContent align="end" className="w-40">
+      <DropdownMenuContent align="end" className="w-44">
         {OPTIONS.map((option) => {
           const Icon = option.icon;
           return (
             <DropdownMenuItem
               key={option.value}
               onClick={() => setTheme(option.value)}
-              className="gap-2"
+              className="gap-2.5"
             >
               <Icon className="h-4 w-4" />
               <span>{option.label}</span>
               {mounted && theme === option.value && (
-                <span className="ml-auto text-primary">•</span>
+                <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
               )}
             </DropdownMenuItem>
           );
