@@ -26,7 +26,7 @@ const FEATURES = [
   {
     icon: Download,
     title: "Genuine exports",
-    body: "Real SVG, PNG (1x, 2x, 3x), PDF, JPEG and .mmd files, generated locally and never uploaded.",
+    body: "Real SVG, PNG, WebP, PDF, JPEG and .mmd files, generated locally and never uploaded.",
   },
   {
     icon: Palette,

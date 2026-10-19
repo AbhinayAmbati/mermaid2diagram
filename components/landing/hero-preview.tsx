@@ -15,6 +15,7 @@ const DEMO_SOURCE = `flowchart LR
 const EXPORT_ROWS = [
   { label: "SVG", note: "vector, print-ready", value: "∞" },
   { label: "PNG", note: "1× · 2× · 3×", value: "3×" },
+  { label: "WebP", note: "compact, keeps alpha", value: "webp" },
   { label: "PDF", note: "A4, portrait or landscape", value: "A4" },
   { label: "Source", note: ".mmd, still editable", value: ".mmd" },
 ];
@@ -59,7 +60,7 @@ export function HeroPreview() {
           <div className="flex items-center justify-end gap-2">
             <span className="h-2 w-2 rounded-full bg-signal" />
             <span className="font-mono text-[2.5rem] font-medium leading-none tracking-tight text-on-panel">
-              5
+              6
             </span>
           </div>
           <span className="label-mono-sm mt-2 block text-on-panel-muted">

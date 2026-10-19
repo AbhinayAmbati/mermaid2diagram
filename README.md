@@ -17,8 +17,8 @@ all in the browser, with no account and no server round-trips.
   newer one. Repeated renders are cleaned up to avoid duplicate SVG ids.
 - **Interactive canvas**: zoom, pan, fit-to-screen, reset and fullscreen, with
   white / transparent (checkerboard) / grid backgrounds and a live zoom readout.
-- **Genuine exports**: SVG (standalone, sanitised), PNG (1×/2×/3×), PDF (A4,
-  portrait or landscape), JPEG and the original `.mmd` source.
+- **Genuine exports**: SVG (standalone, sanitised), PNG (1×/2×/3×), WebP,
+  PDF (A4, portrait or landscape), JPEG and the original `.mmd` source.
 - **Customisation**: four appearance presets (Classic, Monochrome, Terminal Lime,
   Soft Minimal), Mermaid themes, theme variables, font, size and padding.
 - **Twelve example templates** across flowcharts, sequence, class, ER, state,
@@ -127,8 +127,9 @@ All conversion is client-side:
 
 - **SVG**: sanitised with DOMPurify (SVG profile, preserving Mermaid's inline
   `<style>`), given explicit dimensions and an optional background rect.
-- **PNG / JPEG**: the SVG is drawn onto a `<canvas>` at 1-3× (clamped to an
-  8192 px ceiling) and encoded with `canvas.toBlob`.
+- **PNG / WebP / JPEG**: the SVG is drawn onto a `<canvas>` at 1-3× (clamped to
+  an 8192 px ceiling) and encoded with `canvas.toBlob`. PNG and WebP keep an
+  alpha channel; JPEG is coerced to a solid background.
 - **PDF**: the diagram is rasterised at 3× and fitted to an A4 page (portrait or
   landscape) with a configurable background. Mermaid depends heavily on CSS
   classes inside a `<style>` block, so a raster path is used for faithful output.

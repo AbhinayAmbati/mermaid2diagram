@@ -12,6 +12,11 @@ const FORMATS = [
     meta: "1x / 2x / 3x",
   },
   {
+    label: "WebP",
+    body: "Compact raster that keeps transparency, for leaner files.",
+    meta: "alpha",
+  },
+  {
     label: "PDF",
     body: "Fitted to an A4 page in portrait or landscape, with a background option.",
     meta: "A4",
