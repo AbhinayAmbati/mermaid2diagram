@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /*
- * Mermaid Studio - Terminal-inspired design system.
+ * mermaid2diagram - Terminal-inspired design system.
  *
  * Two surfaces: an off-white "paper" light mode and a deep green-black dark
  * mode. A single lime signal colour carries every primary action. Chrome that
@@ -60,6 +60,17 @@
     --nav-hover: rgba(255, 255, 255, 0.08);
 
     --grid-dot: #d9ddd3;
+
+    /*
+     * "Boxes" that stay light in both themes. The landing page's cards and
+     * chips keep a white surface even in dark mode, so they read as distinct
+     * objects on the dark canvas instead of dissolving into it.
+     */
+    --box: #ffffff;
+    --box-foreground: #101613;
+    --box-muted: #6e7a74;
+    --box-line: #dfe2db;
+    --box-hover: #f5f6f3;
 
     /* Editor */
     --editor-bg: #ffffff;

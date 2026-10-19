@@ -8,8 +8,8 @@ const FORMATS = [
   },
   {
     label: "PNG",
-    body: "Lossless raster at 1×, 2× or 3×, with optional transparency.",
-    meta: "1× / 2× / 3×",
+    body: "Lossless raster at 1x, 2x or 3x, with optional transparency.",
+    meta: "1x / 2x / 3x",
   },
   {
     label: "PDF",
@@ -43,22 +43,22 @@ export function ExportFormats() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-box-line bg-box-line sm:grid-cols-2 lg:grid-cols-3">
           {FORMATS.map((format) => (
             <div
               key={format.label}
-              className="group flex flex-col justify-between bg-card p-7 transition-colors hover:bg-accent/50"
+              className="group flex flex-col justify-between bg-box p-7 transition-colors hover:bg-box-hover"
             >
               <div className="flex items-start justify-between">
-                <span className="font-mono text-2xl font-medium tracking-tight">
+                <span className="font-mono text-2xl font-medium tracking-tight text-box-foreground">
                   {format.label}
                 </span>
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                <ArrowUpRight className="h-4 w-4 text-box-muted transition-colors group-hover:text-primary" />
               </div>
-              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-6 text-sm leading-relaxed text-box-muted">
                 {format.body}
               </p>
-              <span className="label-mono-sm mt-5 text-muted-foreground">
+              <span className="label-mono-sm mt-5 text-box-muted">
                 {format.meta}
               </span>
             </div>

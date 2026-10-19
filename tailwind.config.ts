@@ -65,6 +65,15 @@ const config: Config = {
         "on-panel-muted": "var(--on-dark-muted)",
         "panel-line": "var(--on-dark-line)",
 
+        /* Boxes that stay light in both themes */
+        box: {
+          DEFAULT: "var(--box)",
+          foreground: "var(--box-foreground)",
+          muted: "var(--box-muted)",
+          line: "var(--box-line)",
+          hover: "var(--box-hover)",
+        },
+
         /* Floating navigation pill */
         nav: {
           DEFAULT: "var(--nav)",

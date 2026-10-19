@@ -45,7 +45,7 @@ export function Hero() {
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </Button>
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="light" asChild>
               <a href="#examples">Explore Examples</a>
             </Button>
           </div>
