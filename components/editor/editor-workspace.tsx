@@ -210,67 +210,66 @@ export function EditorWorkspace() {
           onNewDiagram={handleNewDiagram}
         />
 
-        <main className="min-h-0 flex-1 px-3 pb-3 sm:px-4 sm:pb-4">
-          <div className="h-full overflow-hidden rounded-xl border border-border bg-card">
-            {isMobile ? (
-              <Tabs
-                value={mobileTab}
-                onValueChange={(v) => setMobileTab(v as "editor" | "preview")}
-                className="flex h-full flex-col"
-              >
-                <div className="flex shrink-0 items-center border-b border-border p-2">
-                  <TabsList className="w-full">
-                    <TabsTrigger value="editor" className="flex-1 gap-1.5">
-                      <Code2 className="h-3.5 w-3.5" />
-                      Editor
-                    </TabsTrigger>
-                    <TabsTrigger value="preview" className="flex-1 gap-1.5">
-                      <Eye className="h-3.5 w-3.5" />
-                      Preview
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-                <TabsContent
-                  value="editor"
-                  className="mt-0 min-h-0 flex-1 data-[state=inactive]:hidden"
-                >
-                  {editorPanel}
-                </TabsContent>
-                <TabsContent
-                  value="preview"
-                  className="mt-0 min-h-0 flex-1 data-[state=inactive]:hidden"
-                >
-                  {canvasPanel}
-                </TabsContent>
-              </Tabs>
-            ) : editorCollapsed ? (
-              <div className="relative h-full">
-                {canvasPanel}
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="absolute bottom-4 left-4 z-10 gap-1.5 shadow-pop"
-                  onClick={() => setEditorCollapsed(false)}
-                >
-                  <PanelLeftOpen className="h-3.5 w-3.5" />
-                  Show editor
-                </Button>
+        {/* Full-screen workspace: panels run edge to edge beneath the pill nav. */}
+        <main className="min-h-0 flex-1">
+          {isMobile ? (
+            <Tabs
+              value={mobileTab}
+              onValueChange={(v) => setMobileTab(v as "editor" | "preview")}
+              className="flex h-full flex-col"
+            >
+              <div className="flex shrink-0 items-center border-b border-border p-2">
+                <TabsList className="w-full">
+                  <TabsTrigger value="editor" className="flex-1 gap-1.5">
+                    <Code2 className="h-3.5 w-3.5" />
+                    Editor
+                  </TabsTrigger>
+                  <TabsTrigger value="preview" className="flex-1 gap-1.5">
+                    <Eye className="h-3.5 w-3.5" />
+                    Preview
+                  </TabsTrigger>
+                </TabsList>
               </div>
-            ) : (
-              <ResizablePanelGroup
-                direction="horizontal"
-                autoSaveId="mermaid-studio-split"
+              <TabsContent
+                value="editor"
+                className="mt-0 min-h-0 flex-1 data-[state=inactive]:hidden"
               >
-                <ResizablePanel defaultSize={40} minSize={22} className="min-w-0">
-                  {editorPanel}
-                </ResizablePanel>
-                <ResizableHandle withHandle />
-                <ResizablePanel defaultSize={60} minSize={30} className="min-w-0">
-                  {canvasPanel}
-                </ResizablePanel>
-              </ResizablePanelGroup>
-            )}
-          </div>
+                {editorPanel}
+              </TabsContent>
+              <TabsContent
+                value="preview"
+                className="mt-0 min-h-0 flex-1 data-[state=inactive]:hidden"
+              >
+                {canvasPanel}
+              </TabsContent>
+            </Tabs>
+          ) : editorCollapsed ? (
+            <div className="relative h-full">
+              {canvasPanel}
+              <Button
+                size="sm"
+                variant="secondary"
+                className="absolute bottom-4 left-4 z-10 gap-1.5 shadow-pop"
+                onClick={() => setEditorCollapsed(false)}
+              >
+                <PanelLeftOpen className="h-3.5 w-3.5" />
+                Show editor
+              </Button>
+            </div>
+          ) : (
+            <ResizablePanelGroup
+              direction="horizontal"
+              autoSaveId="mermaid-studio-split"
+            >
+              <ResizablePanel defaultSize={40} minSize={22} className="min-w-0">
+                {editorPanel}
+              </ResizablePanel>
+              <ResizableHandle withHandle />
+              <ResizablePanel defaultSize={60} minSize={30} className="min-w-0">
+                {canvasPanel}
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          )}
         </main>
       </div>
 
