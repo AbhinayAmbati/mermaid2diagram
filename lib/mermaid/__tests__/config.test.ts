@@ -10,7 +10,7 @@ describe("buildMermaidConfig", () => {
 
   it("never lets Mermaid render its own error graphics into the page", () => {
     const config = buildMermaidConfig(DEFAULT_SETTINGS);
-    expect((config as Record<string, unknown>).suppressErrorRendering).toBe(true);
+    expect(config.suppressErrorRendering).toBe(true);
   });
 
   it("disables html labels so raster export renders text reliably", () => {

@@ -28,14 +28,25 @@ export interface AppearancePreset {
 /** Mermaid runtime configuration surfaced to the UI. */
 export interface MermaidConfig {
   theme: MermaidTheme;
-  themeVariables: ThemeVariables;
+  themeVariables: Record<string, string>;
   securityLevel: "strict" | "loose" | "antiscript" | "sandbox";
   startOnLoad: boolean;
+  /** Keep Mermaid from injecting error graphics into the host document. */
+  suppressErrorRendering?: boolean;
   fontFamily?: string;
   fontSize?: number;
-  flowchart?: { padding?: number; useMaxWidth?: boolean };
-  sequence?: { useMaxWidth?: boolean };
+  flowchart?: { padding?: number; useMaxWidth?: boolean; htmlLabels?: boolean };
+  sequence?: { useMaxWidth?: boolean; wrap?: boolean };
   gantt?: { useMaxWidth?: boolean };
+  class?: { useMaxWidth?: boolean; htmlLabels?: boolean };
+  state?: { useMaxWidth?: boolean };
+  er?: { useMaxWidth?: boolean };
+  journey?: { useMaxWidth?: boolean };
+  pie?: { useMaxWidth?: boolean };
+  gitGraph?: { useMaxWidth?: boolean };
+  requirement?: { useMaxWidth?: boolean };
+  timeline?: { useMaxWidth?: boolean };
+  mindmap?: { useMaxWidth?: boolean; padding?: number };
 }
 
 /** Result of a successful render. */

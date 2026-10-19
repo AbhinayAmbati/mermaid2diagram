@@ -146,6 +146,5 @@ export function buildMermaidConfig(settings: DiagramSettings): MermaidConfig {
     requirement: { useMaxWidth },
     timeline: { useMaxWidth },
     mindmap: { useMaxWidth, padding: settings.padding },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any;
+  };
 }
