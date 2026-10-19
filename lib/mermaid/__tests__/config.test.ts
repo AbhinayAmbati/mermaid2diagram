@@ -33,7 +33,7 @@ describe("buildMermaidConfig", () => {
 
   it("ships four appearance presets with distinct ids", () => {
     const ids = PRESETS.map((p) => p.id);
-    expect(ids).toEqual(["classic", "monochrome", "electric-blue", "soft-minimal"]);
+    expect(ids).toEqual(["classic", "monochrome", "lime-signal", "soft-minimal"]);
     expect(new Set(ids).size).toBe(ids.length);
   });
 });

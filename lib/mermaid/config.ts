@@ -23,13 +23,14 @@ export const MERMAID_THEMES: { id: MermaidTheme; label: string }[] = [
 export const DIAGRAM_FONT_STACK =
   '"Inter", "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif';
 
+/** Default diagram colours, matching the lime-signal preset. */
 export const DEFAULT_THEME_VARIABLES: ThemeVariables = {
-  primaryColor: "#eef4ff",
-  primaryTextColor: "#111318",
-  primaryBorderColor: "#2563ff",
-  lineColor: "#2563ff",
-  secondaryColor: "#f7f8fa",
-  tertiaryColor: "#ffffff",
+  primaryColor: "#f2fbe0",
+  primaryTextColor: "#16220a",
+  primaryBorderColor: "#7fa81a",
+  lineColor: "#4b5a33",
+  secondaryColor: "#ffffff",
+  tertiaryColor: "#f5f6f3",
   fontSize: "14px",
   fontFamily: DIAGRAM_FONT_STACK,
 };
@@ -50,25 +51,25 @@ export const PRESETS: AppearancePreset[] = [
     theme: "base",
     themeVariables: {
       primaryColor: "#ffffff",
-      primaryTextColor: "#111318",
-      primaryBorderColor: "#111318",
-      lineColor: "#111318",
-      secondaryColor: "#f7f8fa",
+      primaryTextColor: "#101613",
+      primaryBorderColor: "#101613",
+      lineColor: "#101613",
+      secondaryColor: "#f5f6f3",
       tertiaryColor: "#ffffff",
     },
   },
   {
-    id: "electric-blue",
-    name: "Electric Blue",
-    description: "Monochrome base with electric-blue highlights.",
+    id: "lime-signal",
+    name: "Terminal Lime",
+    description: "Monochrome base with the lime signal accent.",
     theme: "base",
     themeVariables: {
-      primaryColor: "#eef4ff",
-      primaryTextColor: "#0b1c4d",
-      primaryBorderColor: "#2563ff",
-      lineColor: "#2563ff",
+      primaryColor: "#f2fbe0",
+      primaryTextColor: "#16220a",
+      primaryBorderColor: "#7fa81a",
+      lineColor: "#4b5a33",
       secondaryColor: "#ffffff",
-      tertiaryColor: "#f7f8fa",
+      tertiaryColor: "#f5f6f3",
     },
   },
   {
@@ -77,12 +78,12 @@ export const PRESETS: AppearancePreset[] = [
     description: "Quiet greys with soft borders.",
     theme: "base",
     themeVariables: {
-      primaryColor: "#f7f8fa",
-      primaryTextColor: "#374151",
-      primaryBorderColor: "#e5e7eb",
-      lineColor: "#9ca3af",
+      primaryColor: "#f5f6f3",
+      primaryTextColor: "#3c4642",
+      primaryBorderColor: "#dfe2db",
+      lineColor: "#9aa5a0",
       secondaryColor: "#ffffff",
-      tertiaryColor: "#f3f4f6",
+      tertiaryColor: "#eceee8",
     },
   },
 ];
@@ -93,8 +94,11 @@ export function getPreset(id: string): AppearancePreset | undefined {
 
 export const DEFAULT_SETTINGS: DiagramSettings = {
   theme: "base",
-  presetId: "electric-blue",
-  themeVariables: { ...DEFAULT_THEME_VARIABLES, ...getPreset("electric-blue")!.themeVariables },
+  presetId: "lime-signal",
+  themeVariables: {
+    ...DEFAULT_THEME_VARIABLES,
+    ...getPreset("lime-signal")!.themeVariables,
+  },
   fontFamily: DIAGRAM_FONT_STACK,
   fontSize: 14,
   padding: 16,
