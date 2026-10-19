@@ -42,7 +42,9 @@ test.describe("Mermaid Studio editor", () => {
     await expect(page.locator(".mermaid-canvas svg").first()).toBeVisible();
 
     await page.getByRole("button", { name: "Export" }).first().click();
-    await expect(page.getByText("Export diagram")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /download your diagram/i })
+    ).toBeVisible();
 
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("button", { name: "Download" }).click();
