@@ -5,11 +5,12 @@ import Link from "next/link";
 import { BookOpen, Download, FilePlus2 } from "lucide-react";
 
 import { BrandLockup } from "@/components/layout/logo";
-import { NavDivider, NavPill } from "@/components/layout/nav-pill";
 import { ExamplesMenu } from "@/components/examples/examples-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { Separator } from "@/components/ui/separator";
 import { TooltipButton } from "@/components/ui/tooltip";
 import { DEFAULT_SOURCE, type MermaidTemplate } from "@/lib/examples/templates";
 import { useDiagramStore } from "@/lib/store/use-diagram-store";
@@ -20,6 +21,14 @@ export interface NavbarProps {
   onNewDiagram?: () => void;
 }
 
+/**
+ * The editor's navigation bar.
+ *
+ * Unlike the landing page's floating pill, this is a standard full-width bar
+ * whose surface follows the active theme, so it reads as part of the editor
+ * rather than floating above it: white with the light theme, near-black with
+ * the dark theme.
+ */
 export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
   const source = useDiagramStore((s) => s.source);
   const reset = useDiagramStore((s) => s.reset);
@@ -49,22 +58,23 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 px-3 py-3 sm:px-4 sm:py-4">
-      <NavPill>
-        <Link
-          href="/"
-          className="flex items-center rounded-pill py-1 pl-1.5 pr-2.5 transition-opacity hover:opacity-85"
-        >
-          <BrandLockup />
-        </Link>
+    <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border bg-card px-3 sm:px-4">
+      <Link
+        href="/"
+        className="flex items-center rounded-md py-1 pl-1 pr-2 transition-opacity hover:opacity-80"
+      >
+        <BrandLockup />
+        <Badge variant="outline" className="ml-2.5 hidden sm:inline-flex">
+          Beta
+        </Badge>
+      </Link>
 
-        <NavDivider />
-
+      <div className="ml-auto flex items-center gap-1">
         <Button
           variant="ghost"
           size="sm"
           onClick={handleNew}
-          className="gap-1.5 rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground"
+          className="gap-1.5"
         >
           <FilePlus2 className="h-3.5 w-3.5" />
           <span className="hidden md:inline">New</span>
@@ -78,7 +88,6 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
             size="icon-sm"
             asChild
             aria-label="Open Mermaid documentation"
-            className="rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground"
           >
             <a
               href="https://mermaid.js.org/intro/"
@@ -92,13 +101,13 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
 
         <ThemeToggle />
 
-        <NavDivider />
+        <Separator orientation="vertical" className="mx-1.5 h-5" />
 
-        <Button size="sm" onClick={onOpenExport} className="gap-1.5 rounded-pill">
+        <Button size="sm" onClick={onOpenExport} className="gap-1.5">
           <Download className="h-3.5 w-3.5" />
           <span>Export</span>
         </Button>
-      </NavPill>
+      </div>
 
       <ConfirmDialog
         open={confirmNew}

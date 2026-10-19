@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The Mermaid Studio mark: a lime tile holding a node-and-connector glyph -
+ * The Mermaid Studio mark: a lime tile holding a node-and-connector glyph —
  * the same shape language the product draws.
  */
 export function Logo({
@@ -37,12 +37,28 @@ export function Logo({
   );
 }
 
-/** Mark plus wordmark, sized for the navigation pill. */
-export function BrandLockup({ className }: { className?: string }) {
+/**
+ * Mark plus wordmark.
+ *
+ * `tone="nav"` renders for the dark floating pill (light text); the default
+ * tone inherits the page theme, for the theme-synced editor bar.
+ */
+export function BrandLockup({
+  className,
+  tone = "default",
+}: {
+  className?: string;
+  tone?: "default" | "nav";
+}) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
       <Logo size={26} />
-      <span className="text-[15px] font-semibold tracking-tight text-nav-foreground">
+      <span
+        className={cn(
+          "text-[15px] font-semibold tracking-tight",
+          tone === "nav" ? "text-nav-foreground" : "text-foreground"
+        )}
+      >
         Mermaid Studio
       </span>
     </span>

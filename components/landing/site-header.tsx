@@ -21,7 +21,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center rounded-pill py-1 pl-1.5 pr-2.5 transition-opacity hover:opacity-85"
         >
-          <BrandLockup />
+          <BrandLockup tone="nav" />
         </Link>
 
         <NavDivider />
@@ -52,7 +52,7 @@ export function SiteHeader() {
           </a>
         </Button>
 
-        <ThemeToggle />
+        <ThemeToggle tone="nav" />
 
         <Button size="sm" asChild className="ml-1 gap-1.5 rounded-pill">
           <Link href="/editor">

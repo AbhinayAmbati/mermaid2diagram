@@ -20,7 +20,14 @@ const OPTIONS = [
   { value: "system", label: "System", icon: Monitor },
 ] as const;
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({
+  className,
+  tone = "default",
+}: {
+  className?: string;
+  /** `nav` styles the trigger for the dark floating pill. */
+  tone?: "default" | "nav";
+}) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -38,7 +45,8 @@ export function ThemeToggle({ className }: { className?: string }) {
             size="icon-sm"
             aria-label="Change theme"
             className={cn(
-              "rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground",
+              tone === "nav" &&
+                "rounded-pill text-nav-muted hover:bg-nav-hover hover:text-nav-foreground",
               className
             )}
           >

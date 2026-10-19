@@ -29,7 +29,7 @@ export function SiteFooter() {
         <div className="chamfer-tl-bl border border-panel-line bg-panel px-6 py-10 text-on-panel sm:px-10 sm:py-12">
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
             <div>
-              <BrandLockup />
+              <BrandLockup tone="nav" />
               <p className="mt-6 max-w-[16rem] text-sm leading-relaxed text-on-panel-muted">
                 An instant, in-browser Mermaid editor with a genuine export
                 pipeline.
