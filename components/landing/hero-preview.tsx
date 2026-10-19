@@ -23,6 +23,7 @@ const EXPORT_ROWS = [
 /**
  * The hero's result panel. It inverts with the theme, so on the dark page it
  * becomes a light card. The diagram itself always renders on a white canvas.
+ * Spacing is kept tight so the hero fits one screen.
  */
 export function HeroPreview() {
   const [svg, setSvg] = React.useState<string | null>(null);
@@ -47,37 +48,37 @@ export function HeroPreview() {
   }, []);
 
   return (
-    <div className="chamfer-lg-tl-br bg-panel p-5 text-on-panel sm:p-8">
+    <div className="chamfer-lg-tl-br bg-panel p-5 text-on-panel sm:p-6">
       {/* Header */}
       <div className="flex items-start justify-between gap-6">
         <div>
           <span className="label-mono text-on-panel-muted">Live preview</span>
-          <p className="mt-3 max-w-[15rem] text-[1.5rem] font-medium leading-tight tracking-tight text-on-panel/85">
+          <p className="mt-2 max-w-[15rem] text-[1.35rem] font-medium leading-tight tracking-tight text-on-panel/85">
             Your diagram, rendered as you type.
           </p>
         </div>
         <div className="text-right">
           <div className="flex items-center justify-end gap-2">
             <span className="h-2 w-2 rounded-full bg-signal" />
-            <span className="font-mono text-[2.5rem] font-medium leading-none tracking-tight text-on-panel">
+            <span className="font-mono text-[2.25rem] font-medium leading-none tracking-tight text-on-panel">
               6
             </span>
           </div>
-          <span className="label-mono-sm mt-2 block text-on-panel-muted">
+          <span className="label-mono-sm mt-1.5 block text-on-panel-muted">
             Export formats
           </span>
         </div>
       </div>
 
       {/* Divider with lime signal */}
-      <div className="relative my-7 h-px w-full bg-panel-line">
+      <div className="relative my-4 h-px w-full bg-panel-line">
         <span className="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-signal" />
       </div>
 
       {/* The actual rendered diagram */}
       <div className="relative overflow-hidden rounded-md bg-white">
         <div className="grid-bg-dots absolute inset-0 opacity-70" aria-hidden />
-        <div className="relative flex min-h-[220px] items-center justify-center p-6">
+        <div className="relative flex min-h-[170px] items-center justify-center p-4">
           {svg ? (
             <div
               className="mermaid-canvas [&_svg]:h-auto [&_svg]:max-w-full"
@@ -106,14 +107,14 @@ export function HeroPreview() {
       </div>
 
       {/* Format rows */}
-      <dl className="mt-7 space-y-3">
+      <dl className="mt-4 space-y-2">
         {EXPORT_ROWS.map((row) => (
           <div key={row.label} className="flex items-baseline justify-between gap-4">
-            <dt className="text-[0.9375rem] text-on-panel">
+            <dt className="text-[0.875rem] text-on-panel">
               <span className="font-medium">{row.label}</span>{" "}
               <span className="text-on-panel-muted">({row.note})</span>
             </dt>
-            <dd className="font-mono text-[0.9375rem] text-on-panel-muted">
+            <dd className="font-mono text-[0.875rem] text-on-panel-muted">
               {row.value}
             </dd>
           </div>

@@ -16,29 +16,32 @@ const SPEC_ROWS = [
   },
   {
     label: "Exports",
-    value: "SVG · PNG · PDF · JPEG · .mmd",
+    value: "SVG · PNG · WebP · PDF · JPEG · .mmd",
   },
 ];
 
+/**
+ * The hero fills exactly one viewport beneath the navigation bar, so it needs
+ * no scrolling on a typical laptop. Both columns are top-aligned by the grid,
+ * and the section centres the pair vertically on taller screens.
+ */
 export function Hero() {
   return (
-    <section className="px-4 pb-16 pt-6 sm:pb-24 sm:pt-10">
-      <div className="mx-auto grid max-w-[1320px] items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
+    <section className="flex min-h-[calc(100dvh-4.5rem)] items-center px-4 py-8 sm:min-h-[calc(100dvh-5rem)]">
+      <div className="mx-auto grid w-full max-w-[1320px] items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-14">
         {/* Left: statement */}
-        <div className="pt-4 lg:pt-14">
-          <h1 className="text-balance text-[2.5rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem]">
+        <div>
+          <h1 className="text-balance text-[2.25rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[2.75rem] lg:text-[2.875rem]">
             From Mermaid Code to{" "}
-            <span className="text-muted-foreground/45">
-              Beautiful Diagrams.
-            </span>
+            <span className="text-muted-foreground/45">Beautiful Diagrams.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-pretty text-[1.0625rem] leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground">
             Write or paste Mermaid syntax. Preview your diagrams instantly,
             refine the details, and export crisp visuals in the format you need.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild className="gap-2">
               <Link href="/editor">
                 Start Creating
@@ -50,21 +53,21 @@ export function Hero() {
             </Button>
           </div>
 
-          <dl className="mt-12 max-w-xl">
+          <dl className="mt-7 max-w-xl">
             {SPEC_ROWS.map((row) => (
               <div
                 key={row.label}
-                className="border-t border-border py-4 last:border-b"
+                className="border-t border-border py-2.5 last:border-b"
               >
                 <dt className="label-mono text-muted-foreground">{row.label}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-foreground">
+                <dd className="mt-1.5 text-sm leading-snug text-foreground">
                   {row.value}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             No account required · Runs in your browser
           </p>
         </div>
