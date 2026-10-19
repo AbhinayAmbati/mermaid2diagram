@@ -68,8 +68,8 @@ function MarqueeLane({
 
 export function DiagramTypes() {
   return (
-    <section id="diagram-types" className="py-16 sm:py-24">
-      <div className="mx-auto max-w-[1320px] px-4">
+    <section id="diagram-types" className="px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1320px]">
         <div className="max-w-2xl">
           <span className="label-mono text-muted-foreground">04 / Coverage</span>
           <h2 className="mt-4 text-[1.75rem] font-medium leading-tight tracking-[-0.02em] sm:text-[2.25rem]">
@@ -80,12 +80,12 @@ export function DiagramTypes() {
             Here are the types you are most likely to reach for.
           </p>
         </div>
-      </div>
 
-      {/* Full-bleed marquee lanes: two rows drifting in opposite directions */}
-      <div className="mt-12 space-y-4">
-        <MarqueeLane items={ROW_ONE} direction="left" />
-        <MarqueeLane items={ROW_TWO} direction="right" />
+        {/* Two lanes drifting in opposite directions, held to the page width */}
+        <div className="mt-12 space-y-4">
+          <MarqueeLane items={ROW_ONE} direction="left" />
+          <MarqueeLane items={ROW_TWO} direction="right" />
+        </div>
       </div>
     </section>
   );
