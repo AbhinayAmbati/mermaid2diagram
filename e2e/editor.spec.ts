@@ -15,7 +15,7 @@ test.describe("mermaid2diagram editor", () => {
     await editor.click();
     // Select everything and replace it with a new, valid diagram.
     await page.keyboard.press("ControlOrMeta+A");
-    await page.keyboard.type("flowchart LR\n  X[Alpha] --> Y[Beta]");
+    await page.keyboard.type("flowchart LR\n  X[Alpha] --> Y[Omega]");
 
     await expect(page.locator(".mermaid-canvas svg").first()).toContainText(
       "Alpha"

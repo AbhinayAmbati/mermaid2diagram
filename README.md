@@ -4,8 +4,6 @@
 it instantly, refine the details, and export crisp SVG, PNG, PDF or JPEG files,
 all in the browser, with no account and no server round-trips.
 
-![status](https://img.shields.io/badge/status-beta-2563ff)
-
 ---
 
 ## Highlights
