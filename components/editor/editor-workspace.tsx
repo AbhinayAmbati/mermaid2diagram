@@ -259,7 +259,7 @@ export function EditorWorkspace() {
           ) : (
             <ResizablePanelGroup
               direction="horizontal"
-              autoSaveId="mermaid-studio-split"
+              autoSaveId="mermaid2diagram-split"
             >
               <ResizablePanel defaultSize={40} minSize={22} className="min-w-0">
                 {editorPanel}

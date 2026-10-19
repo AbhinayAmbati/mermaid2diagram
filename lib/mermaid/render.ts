@@ -23,7 +23,7 @@ let idCounter = 0;
 /** A fresh, collision-free id for each render pass. */
 export function nextRenderId(): string {
   idCounter += 1;
-  return `mermaid-studio-${Date.now().toString(36)}-${idCounter}`;
+  return `mermaid2diagram-${Date.now().toString(36)}-${idCounter}`;
 }
 
 /**

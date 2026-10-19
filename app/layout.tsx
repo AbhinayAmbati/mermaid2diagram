@@ -10,8 +10,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mermaid Studio: From Mermaid code to beautiful diagrams",
-    template: "%s · Mermaid Studio",
+    default: "mermaid2diagram: From Mermaid code to beautiful diagrams",
+    template: "%s · mermaid2diagram",
   },
   description:
     "Write or paste Mermaid syntax, preview diagrams instantly, refine the details and export crisp SVG, PNG, PDF or JPEG, entirely in your browser.",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     "svg export",
     "developer tools",
   ],
-  authors: [{ name: "Mermaid Studio" }],
+  authors: [{ name: "mermaid2diagram" }],
   openGraph: {
-    title: "Mermaid Studio: From Mermaid code to beautiful diagrams",
+    title: "mermaid2diagram: From Mermaid code to beautiful diagrams",
     description:
       "An instant, in-browser Mermaid editor with premium export options.",
     type: "website",

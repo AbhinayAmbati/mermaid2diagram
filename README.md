@@ -1,4 +1,4 @@
-# Mermaid Studio
+# mermaid2diagram
 
 **From Mermaid code to beautiful diagrams.** Paste or write Mermaid syntax, preview
 it instantly, refine the details, and export crisp SVG, PNG, PDF or JPEG files,

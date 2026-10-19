@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The Mermaid Studio mark: a lime tile holding a node-and-connector glyph —
+ * The mermaid2diagram mark: a lime tile holding a node-and-connector glyph,
  * the same shape language the product draws.
  */
 export function Logo({
@@ -59,7 +59,7 @@ export function BrandLockup({
           tone === "nav" ? "text-nav-foreground" : "text-foreground"
         )}
       >
-        Mermaid Studio
+        mermaid2diagram
       </span>
     </span>
   );

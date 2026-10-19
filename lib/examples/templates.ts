@@ -189,7 +189,7 @@ export const TEMPLATES: MermaidTemplate[] = [
     description: "Product structure as a mindmap.",
     category: "Structure",
     code: `mindmap
-  root((Mermaid Studio))
+  root((mermaid2diagram))
     Editor
       Syntax highlighting
       Debounced render

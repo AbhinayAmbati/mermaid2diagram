@@ -1,7 +1,7 @@
 import type { DiagramSettings } from "@/types/diagram";
 
 /** Key under which the working draft is stored locally. */
-export const DRAFT_STORAGE_KEY = "mermaid-studio:draft:v1";
+export const DRAFT_STORAGE_KEY = "mermaid2diagram:draft:v1";
 
 export interface StoredDraft {
   source: string;

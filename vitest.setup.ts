@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/vitest";
 
 // jsdom does not implement the object-URL API used by the download helper.
 if (typeof URL.createObjectURL !== "function") {
-  URL.createObjectURL = () => "blob:mermaid-studio-test";
+  URL.createObjectURL = () => "blob:mermaid2diagram-test";
   URL.revokeObjectURL = () => {};
 }
 

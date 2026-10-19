@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("Mermaid Studio editor", () => {
+test.describe("mermaid2diagram editor", () => {
   test("renders the default diagram on load", async ({ page }) => {
     await page.goto("/editor");
     await expect(page.locator(".mermaid-canvas svg").first()).toBeVisible();

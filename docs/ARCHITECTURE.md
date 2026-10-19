@@ -1,6 +1,6 @@
 # Architecture
 
-Mermaid Studio is a client-side application. There is no backend, database or
+mermaid2diagram is a client-side application. There is no backend, database or
 authentication. The whole product is a static Next.js app whose only runtime
 dependency is the browser.
 
