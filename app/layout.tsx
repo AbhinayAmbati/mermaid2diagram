@@ -6,30 +6,60 @@ import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "@/components/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { site, siteUrl } from "@/lib/seo/site";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
+  // Makes every relative URL below resolve to an absolute one.
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "mermaid2diagram: From Mermaid code to beautiful diagrams",
-    template: "%s · mermaid2diagram",
+    default: `${site.name}: ${site.tagline}`,
+    template: `%s · ${site.name}`,
   },
-  description:
-    "Write or paste Mermaid syntax, preview diagrams instantly, refine the details and export crisp SVG, PNG, PDF or JPEG, entirely in your browser.",
-  keywords: [
-    "mermaid",
-    "diagram",
-    "flowchart",
-    "sequence diagram",
-    "svg export",
-    "developer tools",
-  ],
-  authors: [{ name: "mermaid2diagram" }],
+  description: site.description,
+  applicationName: site.name,
+  keywords: [...site.keywords],
+  authors: [{ name: site.author, url: site.authorUrl }],
+  creator: site.author,
+  publisher: site.name,
+  category: "developer tools",
+  referrer: "origin-when-cross-origin",
+  formatDetection: { email: false, address: false, telephone: false },
+  manifest: "/manifest.webmanifest",
   openGraph: {
-    title: "mermaid2diagram: From Mermaid code to beautiful diagrams",
-    description:
-      "An instant, in-browser Mermaid editor with premium export options.",
     type: "website",
+    locale: site.locale,
+    url: siteUrl,
+    siteName: site.name,
+    title: `${site.name}: ${site.tagline}`,
+    description: site.description,
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: `${site.name}: ${site.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name}: ${site.tagline}`,
+    description: site.description,
+    images: [{ url: "/og.png", alt: `${site.name}: ${site.tagline}` }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
