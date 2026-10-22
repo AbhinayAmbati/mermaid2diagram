@@ -87,7 +87,7 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
         href="/"
         className="flex items-center rounded-md py-1 pl-1 pr-2 transition-opacity hover:opacity-80"
       >
-        <BrandLockup />
+        <BrandLockup wordmarkClassName="hidden min-[560px]:inline" />
       </Link>
 
       <div className="ml-auto flex items-center gap-1">
@@ -109,6 +109,7 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
             size="icon-sm"
             asChild
             aria-label="Open Mermaid documentation"
+            className="hidden sm:inline-flex"
           >
             <a
               href="https://mermaid.js.org/intro/"
@@ -126,7 +127,7 @@ export function Navbar({ onOpenExport, onNewDiagram }: NavbarProps) {
 
         <Button size="sm" onClick={onOpenExport} className="gap-1.5">
           <Download className="h-3.5 w-3.5" />
-          <span>Export</span>
+          <span className="hidden min-[380px]:inline">Export</span>
         </Button>
       </div>
 

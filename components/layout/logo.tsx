@@ -45,18 +45,25 @@ export function Logo({
  */
 export function BrandLockup({
   className,
+  wordmarkClassName,
   tone = "default",
 }: {
   className?: string;
+  /**
+   * Visibility classes for the wordmark. Narrow bars pass a breakpoint so the
+   * mark survives on its own once there is no room for the full name.
+   */
+  wordmarkClassName?: string;
   tone?: "default" | "nav";
 }) {
   return (
-    <span className={cn("flex items-center gap-2.5", className)}>
+    <span className={cn("flex min-w-0 items-center gap-2.5", className)}>
       <Logo size={26} />
       <span
         className={cn(
-          "text-[15px] font-semibold tracking-tight",
-          tone === "nav" ? "text-nav-foreground" : "text-foreground"
+          "truncate text-[15px] font-semibold tracking-tight",
+          tone === "nav" ? "text-nav-foreground" : "text-foreground",
+          wordmarkClassName
         )}
       >
         mermaid2diagram

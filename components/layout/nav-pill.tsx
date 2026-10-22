@@ -48,6 +48,11 @@ export function NavLink({
 }
 
 /** Thin vertical divider between pill groups. */
-export function NavDivider() {
-  return <span className="mx-1.5 h-6 w-px shrink-0 bg-nav-line" aria-hidden />;
+export function NavDivider({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn("mx-1.5 h-6 w-px shrink-0 bg-nav-line", className)}
+      aria-hidden
+    />
+  );
 }
