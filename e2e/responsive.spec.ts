@@ -63,8 +63,10 @@ test.describe("responsive navigation", () => {
       "the landing page should not scroll sideways at 360px"
     ).toBeLessThanOrEqual(1);
 
-    // The editor bar, measured once the diagram has settled.
+    // The editor bar, measured once the diagram has settled. Below lg the
+    // canvas sits behind the Preview tab, so switch to it first.
     await page.goto("/editor");
+    await page.getByRole("tab", { name: "Preview" }).click();
     await expect(
       page.locator('[data-testid="diagram-canvas"] svg').first()
     ).toBeVisible();
